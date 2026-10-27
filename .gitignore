@@ -1,0 +1,11 @@
+# Configuración local de Claude Code
+.claude/
+
+# Copias viejas del sitio
+index - copia.html
+index-respaldo-*.html
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

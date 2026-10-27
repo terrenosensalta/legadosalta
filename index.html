@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LEGADO DE SALTA — Marroquinería de Autor en Cuero | Tienda Oficial</title>
-  <meta name="description" content="Carteras de cuero vacuno legítimo hechas a mano en Salta. Diseños únicos de autor, ediciones numeradas y envíos a todo el país." />
+  <title>LEGADO DE SALTA — Marroquinería de Autor en Cuero | De Salta, Argentina, para el mundo</title>
+  <meta name="description" content="Carteras de cuero vacuno legítimo hechas a mano en Salta, Argentina. Diseños únicos de autor, ediciones numeradas y envíos a todo el mundo." />
   <meta name="theme-color" content="#1e1612" />
   <link rel="icon" type="image/png" href="assets/logo-transparent.png" />
   <meta property="og:title" content="Legado de Salta — Marroquinería de Autor en Cuero" />
-  <meta property="og:description" content="Carteras de cuero hechas a mano en Salta. Diseños únicos de autor." />
+  <meta property="og:description" content="Carteras de cuero hechas a mano en Salta, Argentina, para el mundo. Diseños únicos de autor." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/editorial-1.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -85,6 +87,7 @@
       position: relative;
       width: 100%;
       min-height: calc(100vh - 34px);
+      min-height: calc(100svh - 34px);
       background: #ffffff;
       overflow: hidden;
       display: flex;
@@ -669,14 +672,22 @@
       }
     }
 
+    /* Las posiciones de cada slot se expresan en "unidades de cartera" (--u),
+       así el carrusel escala igual en celular, notebook y pantallas grandes. */
+    .stage-layer {
+      --bag-w: clamp(300px, 30vw, 440px);
+      --u: calc(var(--bag-w) / 440);
+    }
+
     .bag-item {
       position: absolute;
       left: 50%;
       top: 49%;
-      width: 440px;
-      height: 490px;
-      margin-left: -220px;
-      margin-top: -245px;
+      width: var(--bag-w);
+      height: calc(var(--bag-w) * 1.11);
+      margin-left: calc(var(--bag-w) / -2);
+      margin-top: calc(var(--bag-w) * -0.555);
+      transform: translate3d(calc(var(--tx, 0) * var(--u)), calc(var(--ty, 0) * var(--u)), 0) scale(var(--s, 1));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -711,21 +722,21 @@
     }
 
     .bag-item[data-slot="active"] {
-      transform: translate3d(0px, 0px, 0) scale(1);
+      --tx: 0; --ty: 0; --s: 1;
       opacity: 1;
       filter: blur(0px);
       z-index: 6;
     }
 
     .bag-item[data-slot="prev"] {
-      transform: translate3d(-240px, -215px, 0) scale(0.42);
+      --tx: -240; --ty: -215; --s: 0.42;
       opacity: 0;
       filter: blur(2px);
       z-index: 4;
     }
 
     .bag-item[data-slot="exiting-top"] {
-      transform: translate3d(-210px, -195px, 0) scale(0.45);
+      --tx: -210; --ty: -195; --s: 0.45;
       opacity: 0;
       filter: blur(1.5px);
       z-index: 5;
@@ -736,7 +747,7 @@
     }
 
     .bag-item[data-slot="next"] {
-      transform: translate3d(330px, 230px, 0) scale(0.28);
+      --tx: 330; --ty: 230; --s: 0.28;
       opacity: 0.96;
       filter: blur(0px);
       z-index: 7;
@@ -744,8 +755,10 @@
       cursor: pointer;
     }
 
-    .bag-item[data-slot="next"]:hover {
-      transform: translate3d(330px, 222px, 0) scale(0.305);
+    @media (hover: hover) and (pointer: fine) {
+      .bag-item[data-slot="next"]:hover {
+        --ty: 222; --s: 0.305;
+      }
     }
 
     .next-hint {
@@ -763,19 +776,21 @@
       transition: opacity 0.25s ease;
     }
 
-    .bag-item[data-slot="next"]:hover .next-hint {
-      opacity: 0.85;
+    @media (hover: hover) and (pointer: fine) {
+      .bag-item[data-slot="next"]:hover .next-hint {
+        opacity: 0.85;
+      }
     }
 
     .bag-item[data-slot="far-next"] {
-      transform: translate3d(510px, 285px, 0) scale(0.12);
+      --tx: 510; --ty: 285; --s: 0.12;
       opacity: 0;
       filter: blur(4px);
       z-index: 2;
     }
 
     .bag-item[data-slot="far-prev"] {
-      transform: translate3d(-310px, -275px, 0) scale(0.26);
+      --tx: -310; --ty: -275; --s: 0.26;
       opacity: 0;
       filter: blur(6px);
       z-index: 1;
@@ -1332,6 +1347,318 @@
       color: var(--text-muted);
     }
 
+    /* ==================== BANNER EDITORIAL (CAMPO) ==================== */
+    .campo-banner {
+      position: relative;
+      min-height: min(86vh, 820px);
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      isolation: isolate;
+      background: #2d2a20;
+    }
+
+    .campo-media {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .campo-media img {
+      width: 100%;
+      height: 116%;
+      margin-top: -8%;
+      object-fit: cover;
+      object-position: 55% 40%;
+      display: block;
+      transform: translate3d(0, var(--parallax, 0px), 0);
+      will-change: transform;
+    }
+
+    /* Degradé para que el texto se lea sobre la foto */
+    .campo-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(20, 16, 10, 0.62) 0%, rgba(20, 16, 10, 0.25) 42%, rgba(20, 16, 10, 0) 65%);
+    }
+
+    .campo-copy {
+      max-width: 1420px;
+      width: 100%;
+      margin: 0 auto;
+      padding: clamp(48px, 7vw, 96px) clamp(28px, 5.5vw, 84px);
+      color: #ffffff;
+    }
+
+    .campo-copy > * {
+      max-width: 470px;
+    }
+
+    .campo-copy .section-kicker {
+      color: var(--gold-light);
+    }
+
+    .campo-copy .section-title,
+    .campo-copy .section-title em {
+      color: #ffffff;
+    }
+
+    .campo-copy .section-subtitle {
+      color: rgba(255, 255, 255, 0.86);
+      margin-bottom: 26px;
+    }
+
+    .campo-copy .cta-btn {
+      background: #ffffff;
+      color: var(--espresso-deep);
+      border-color: #ffffff;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .campo-copy .cta-btn:hover {
+        background: var(--bg-sand);
+        border-color: var(--bg-sand);
+      }
+    }
+
+    /* Entrada: la foto aparece desde un leve zoom y el texto sube */
+    .js .campo-banner[data-reveal] {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js .campo-banner[data-reveal] .campo-media {
+      opacity: 0;
+      transform: scale(1.08);
+      transition: opacity 1.4s ease, transform 2.2s var(--ease-couture);
+    }
+
+    .js .campo-banner[data-reveal] .campo-copy > * {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.9s ease, transform 1s var(--ease-couture);
+    }
+
+    .js .campo-banner[data-reveal] .campo-copy > *:nth-child(2) { transition-delay: 120ms; }
+    .js .campo-banner[data-reveal] .campo-copy > *:nth-child(3) { transition-delay: 240ms; }
+    .js .campo-banner[data-reveal] .campo-copy > *:nth-child(4) { transition-delay: 360ms; }
+
+    .js .campo-banner[data-reveal].is-visible .campo-media,
+    .js .campo-banner[data-reveal].is-visible .campo-copy > * {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* En celular: primero la foto, después el texto */
+    @media (max-width: 860px) {
+      .campo-banner {
+        display: block;
+        min-height: 0;
+        background: var(--bg-ivory);
+      }
+      .campo-media {
+        position: relative;
+        inset: auto;
+        z-index: 0;
+        aspect-ratio: 4 / 5;
+      }
+      .campo-media img {
+        object-position: 50% center;
+      }
+      .campo-media::after {
+        display: none;
+      }
+      .campo-copy {
+        color: var(--espresso-deep);
+        padding: 30px 22px 54px;
+      }
+      .campo-copy .section-title {
+        color: var(--espresso-deep);
+      }
+      .campo-copy .section-title em {
+        color: var(--espresso-mid);
+      }
+      .campo-copy .section-kicker {
+        color: var(--gold-accent);
+      }
+      .campo-copy .section-subtitle {
+        color: var(--text-body);
+      }
+      .campo-copy .cta-btn {
+        background: var(--espresso-deep);
+        color: #ffffff;
+        border-color: var(--espresso-deep);
+      }
+    }
+
+    /* ==================== LOOKBOOK ==================== */
+    .lookbook-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr;
+      grid-auto-rows: minmax(220px, auto);
+      gap: 18px;
+    }
+
+    .lookbook-item {
+      position: relative;
+      margin: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--bg-sand);
+      aspect-ratio: 4 / 5;
+    }
+
+    .lookbook-item--tall {
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+
+    .lookbook-item--wide {
+      grid-column: span 2;
+      aspect-ratio: 16 / 9;
+    }
+
+    .lookbook-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .lookbook-item figcaption {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 10px 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--espresso-deep);
+    }
+
+    .lookbook-item figcaption span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .lookbook-item figcaption button {
+      flex-shrink: 0;
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      background: var(--espresso-deep);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 9px 14px;
+      cursor: pointer;
+      transition: background-color 0.25s ease, transform 0.2s var(--ease-couture);
+    }
+
+    .lookbook-item figcaption button:active {
+      transform: scale(0.95);
+    }
+
+    /* Entrada: la foto se descubre como un telón con un zoom lento.
+       El recorte va en la imagen (no en la tarjeta) para que el navegador la detecte al bajar */
+    .js .lookbook-item[data-reveal] {
+      opacity: 1;
+      transform: none;
+      background: transparent;
+      transition: none;
+    }
+
+    .js .lookbook-item[data-reveal] img {
+      clip-path: inset(100% 0 0 0);
+      transform: scale(1.18);
+      transition:
+        clip-path 1.2s var(--ease-couture) var(--d, 0ms),
+        transform 1.8s var(--ease-couture) var(--d, 0ms);
+    }
+
+    .js .lookbook-item[data-reveal] figcaption {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.7s ease calc(var(--d, 0ms) + 600ms), transform 0.8s var(--ease-couture) calc(var(--d, 0ms) + 600ms);
+    }
+
+    .js .lookbook-item[data-reveal].is-visible img {
+      clip-path: inset(0 0 0 0);
+      transform: scale(1);
+    }
+
+    .js .lookbook-item[data-reveal].is-visible figcaption {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Después de entrar, la foto "respira" muy despacio */
+    .lookbook-item:not([data-reveal]) img {
+      animation: lookBreath 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes lookBreath {
+      from { transform: scale(1); }
+      to { transform: scale(1.05) translateY(-1%); }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .lookbook-item:hover img {
+        animation-play-state: paused;
+      }
+      .lookbook-item figcaption button:hover {
+        background: var(--espresso-mid);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .lookbook-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .lookbook-item--tall {
+        grid-column: span 2;
+        grid-row: auto;
+        aspect-ratio: 4 / 5;
+      }
+      .lookbook-item--wide {
+        grid-column: span 2;
+        aspect-ratio: 4 / 3;
+      }
+      .lookbook-item--wide img {
+        object-position: 78% center;
+      }
+      .lookbook-item figcaption {
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        font-size: 14px;
+      }
+      .lookbook-item:not(.lookbook-item--tall):not(.lookbook-item--wide) figcaption span {
+        display: none;
+      }
+      .lookbook-item:not(.lookbook-item--tall):not(.lookbook-item--wide) figcaption {
+        justify-content: center;
+        padding: 6px;
+      }
+    }
+
     /* ==================== LEATHER CARE & FAQ ACCORDION ==================== */
     .care-grid {
       display: grid;
@@ -1744,13 +2071,237 @@
       gap: 8px;
     }
 
-    .drawer-items {
+    .drawer-count {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .drawer-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 28px;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .drawer-items {
+      padding: 20px 28px 4px;
       display: flex;
       flex-direction: column;
       gap: 18px;
+    }
+
+    /* Datos del pedido */
+    .order-details {
+      margin: 8px 28px 24px;
+      padding: 20px;
+      border: 1px solid var(--border-delicate);
+      border-radius: 16px;
+      background: var(--bg-ivory);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .order-details-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--espresso-deep);
+    }
+
+    .order-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border: none;
+      min-width: 0;
+    }
+
+    .order-field > span,
+    .order-field > legend {
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0;
+      margin-bottom: 6px;
+    }
+
+    .order-field > span {
+      margin-bottom: 0;
+    }
+
+    .order-details .form-input,
+    .order-details .form-textarea {
+      background: #ffffff;
+      font-size: 16px; /* evita el zoom automático en iPhone */
+      padding: 11px 14px;
+    }
+
+    .order-details .form-textarea {
+      min-height: 64px;
+    }
+
+    .form-input.invalid {
+      border-color: #b4472f;
+      animation: shake 0.4s var(--ease-couture);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: none; }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-2px); }
+    }
+
+    .pay-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pay-option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border: 1px solid var(--border-delicate);
+      border-radius: 12px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .pay-option input {
+      accent-color: var(--espresso-deep);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .pay-option span {
+      display: flex;
+      flex-direction: column;
+      font-size: 12.5px;
+      color: var(--espresso-deep);
+      line-height: 1.3;
+    }
+
+    .pay-option small {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .pay-option:has(input:checked) {
+      border-color: var(--espresso-deep);
+      box-shadow: 0 6px 18px rgba(30, 22, 18, 0.08);
+    }
+
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-item-remove {
+      appearance: none;
+      border: none;
+      background: none;
+      padding: 4px 0;
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+
+    .cart-item-remove:hover {
+      color: var(--espresso-deep);
+    }
+
+    .cart-item-row.removing {
+      animation: rowOut 0.32s var(--ease-couture) forwards;
+    }
+
+    @keyframes rowOut {
+      to { opacity: 0; transform: translateX(24px); }
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-body);
+    }
+
+    .summary-discount {
+      color: #4f7a52;
+      font-weight: 500;
+    }
+
+    .summary-discount[hidden] {
+      display: none;
+    }
+
+    .checkout-note {
+      font-size: 10.5px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .drawer-empty-cta {
+      margin-top: 22px;
+    }
+
+    .cart-drawer.is-empty .order-details,
+    .cart-drawer.is-empty .drawer-footer {
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      .cart-drawer {
+        width: 100vw;
+      }
+      .drawer-header,
+      .drawer-shipping-banner,
+      .drawer-items,
+      .drawer-footer {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+      .order-details {
+        margin-left: 18px;
+        margin-right: 18px;
+        padding: 16px;
+      }
+      .cart-item-row {
+        grid-template-columns: 64px 1fr auto;
+        gap: 12px;
+      }
+      .cart-item-thumb {
+        width: 64px;
+        height: 74px;
+      }
+      .cart-item-name {
+        font-size: 16.5px;
+      }
+      .qty-btn {
+        width: 34px;
+        height: 32px;
+        font-size: 15px;
+      }
     }
 
     .drawer-empty {
@@ -1824,12 +2375,13 @@
     }
 
     .drawer-footer {
-      padding: 22px 28px 28px;
+      padding: 16px 28px calc(18px + env(safe-area-inset-bottom));
       border-top: 1px solid var(--border-delicate);
-      background: var(--bg-ivory);
+      background: #ffffff;
+      box-shadow: 0 -12px 28px rgba(30, 22, 18, 0.05);
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 7px;
     }
 
     .gift-note-check {
@@ -1845,7 +2397,9 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: 8px 0;
+      padding: 6px 0 4px;
+      margin-top: 2px;
+      border-top: 1px solid var(--border-delicate);
     }
 
     .drawer-total-label {
@@ -1858,7 +2412,7 @@
 
     .drawer-total-val {
       font-family: var(--font-serif);
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 600;
       color: var(--espresso-deep);
     }
@@ -1876,11 +2430,25 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 4px;
+      box-shadow: 0 10px 26px rgba(30, 22, 18, 0.16);
+      transition: background 0.25s ease, transform 0.2s var(--ease-couture);
+    }
+
+    .checkout-whatsapp-btn svg {
+      color: #5fd38a;
     }
 
     .checkout-whatsapp-btn:hover {
       background: var(--espresso-mid);
+    }
+
+    .checkout-whatsapp-btn:active {
+      transform: scale(0.97);
     }
 
     /* ==================== QUICKVIEW PRODUCT MODAL ==================== */
@@ -1908,7 +2476,9 @@
       background: #ffffff;
       width: min(920px, 96vw);
       max-height: 90vh;
+      max-height: 90dvh;
       overflow-y: auto;
+      overscroll-behavior: contain;
       border-radius: 24px;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1991,6 +2561,15 @@
       gap: 8px;
       font-size: 12px;
       color: var(--text-body);
+    }
+
+    .modal-format {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: -8px 0 20px;
     }
 
     .specs-list strong {
@@ -2183,6 +2762,53 @@
 
     /* Touch devices: no hover-swap stuck states */
     @media (hover: none) {
+      .icon-btn:hover,
+      .arrow-btn:hover,
+      .social-btn:hover {
+        background: #ffffff;
+        color: var(--espresso-deep);
+        border-color: var(--border-delicate);
+        transform: none;
+      }
+      .icon-btn[aria-pressed="true"]:hover {
+        background: var(--espresso-deep);
+        color: #ffffff;
+        border-color: var(--espresso-deep);
+      }
+      .cta-btn:hover {
+        background: var(--espresso-deep);
+        border-color: var(--espresso-deep);
+        transform: none;
+        box-shadow: 0 10px 26px rgba(30, 22, 18, 0.14);
+      }
+      .cta-btn-secondary:hover {
+        border-color: var(--border-strong);
+        transform: none;
+      }
+      .add-bag-btn:hover {
+        background: var(--espresso-deep);
+        color: #ffffff;
+      }
+      .swatch-btn:hover:not(.active),
+      .brand:hover .brand-seal,
+      .collage-card:hover img {
+        transform: none;
+      }
+      .quickview-pill:hover {
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--espresso-deep);
+      }
+      /* Respuesta táctil al presionar */
+      .cta-btn:active,
+      .cta-btn-secondary:active,
+      .add-bag-btn:active,
+      .icon-btn:active,
+      .arrow-btn:active,
+      .filter-btn:active,
+      .size-btn:active,
+      .checkout-whatsapp-btn:active {
+        transform: scale(0.96);
+      }
       .product-card:hover {
         transform: none;
         box-shadow: none;
@@ -2221,15 +2847,18 @@
     }
 
     /* Responsive adjustments */
+    @media (max-width: 1280px) {
+      .hero-main {
+        grid-template-columns: minmax(260px, 330px) 1fr minmax(200px, 240px);
+      }
+      .stage-layer {
+        --bag-w: clamp(280px, 27vw, 400px);
+      }
+    }
+
     @media (max-width: 1100px) {
       .bag-item[data-slot="next"] {
-        transform: translate3d(330px, 190px, 0) scale(0.24);
-      }
-      .bag-item {
-        width: 380px;
-        height: 420px;
-        margin-left: -190px;
-        margin-top: -210px;
+        --ty: 200; --s: 0.24;
       }
       .pillars-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2254,6 +2883,9 @@
       .nav-pill-shell::-webkit-scrollbar {
         display: none;
       }
+    }
+
+    @media (max-width: 1180px) {
       .announcement-bar {
         position: relative;
         height: 34px;
@@ -2279,26 +2911,81 @@
       }
       .announcement-bar > span:nth-child(3) { animation-delay: 4s; }
       .announcement-bar > span:nth-child(5) { animation-delay: 8s; }
+    }
+
+    @media (max-width: 1000px) {
       .atelier-viewport {
         min-height: auto;
       }
+      /* En pantallas angostas el escenario de la cartera entra en el flujo,
+         y va primero: se ve la cartera y después su descripción */
       .hero-main {
-        grid-template-columns: 1fr;
-        gap: 320px;
-        padding: 28px 0;
+        display: contents;
+      }
+      .hero-main > [aria-hidden="true"] {
+        display: none;
+      }
+      .stage-layer {
+        order: 1;
+        position: relative;
+        inset: auto;
+        --bag-w: min(330px, 80vw);
+        height: calc(var(--bag-w) * 1.22);
+        margin: 14px calc(-1 * clamp(28px, 5.5vw, 84px)) 0;
+      }
+      .hero-left {
+        order: 2;
+        padding-top: 18px;
+      }
+      .hero-desc {
+        min-height: calc(1.78em * 6);
+        margin-bottom: 22px;
+      }
+      .stage-floor-shadow {
+        top: 90%;
+        width: calc(var(--bag-w) * 0.6);
+      }
+      .bag-item {
+        top: 46%;
+      }
+      .bag-item[data-slot="next"] {
+        --tx: 175; --ty: 165; --s: 0.26;
+      }
+      .bag-item[data-slot="far-next"] {
+        --tx: 260; --ty: 220;
+      }
+      .bag-item,
+      .bag-item[data-slot] {
+        filter: none;
       }
       .hero-right {
+        order: 3;
         align-items: flex-start;
         text-align: left;
+        padding: 8px 0 28px;
+      }
+      .hero-footer {
+        order: 4;
       }
       .price-group, .selector-group {
         align-items: flex-start;
       }
-      .bag-item[data-slot="next"] {
-        transform: translate3d(135px, 155px, 0) scale(0.22);
+      .swatch-list {
+        justify-content: flex-start;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hero-footer {
+        grid-template-columns: auto 1fr;
+        row-gap: 14px;
       }
       .origin-stamp {
-        display: none;
+        grid-column: 1 / -1;
+        justify-self: center;
+        text-align: center;
+        font-size: 9px;
       }
       .atelier-story-grid,
       .care-grid,
@@ -2310,6 +2997,21 @@
       }
       .modal-gallery {
         min-height: 300px;
+      }
+      /* La X queda siempre a mano aunque se baje dentro de la ficha */
+      .modal-close {
+        position: fixed;
+        top: 14px;
+        right: 14px;
+        z-index: 130;
+        box-shadow: 0 6px 18px rgba(30, 22, 18, 0.18);
+      }
+      .swatch-btn {
+        width: 34px;
+        height: 34px;
+      }
+      .swatch-list {
+        gap: 10px;
       }
       .navbar.is-condensed .nav-pill-shell {
         display: none;
@@ -2326,22 +3028,22 @@
 
   <!-- Top Luxury Announcement Bar -->
   <div class="announcement-bar">
-    <span>Envíos asegurados sin cargo a todo el país</span>
+    <span>Envíos asegurados a Argentina y al mundo</span>
     <span class="announcement-sep">✦</span>
-    <span>Marroquinería artesanal en cuero vacuno 100% legítimo</span>
+    <span>Cuero legítimo, hecho a mano en Salta</span>
     <span class="announcement-sep">✦</span>
-    <span>3 y 6 cuotas sin interés · 15% OFF en transferencia</span>
+    <span>3 y 6 cuotas sin interés en Argentina</span>
   </div>
 
   <!-- ==================== HERO 3D DIAGONAL SHOWCASE ==================== -->
-  <main class="atelier-viewport" id="top" aria-label="Legado de Salta — Showcase Principal">
+  <main class="atelier-viewport" id="top" aria-label="Legado de Salta — Presentación principal">
     <div class="ambient-bg" id="ambientBg"></div>
     <img src="assets/logo-transparent.png" alt="" class="seal-watermark" aria-hidden="true" />
 
     <!-- Top Couture Navigation Bar -->
     <div class="navbar-spacer" id="navbarSpacer" aria-hidden="true"></div>
     <header class="navbar hero-intro" id="navbar" style="--d: 0ms">
-      <a href="#top" class="brand" aria-label="Legado de Salta Inicio">
+      <a href="#top" class="brand" aria-label="Legado de Salta — Inicio">
         <img src="assets/logo-transparent.png" alt="Logo Legado de Salta" class="brand-seal" />
         <div class="brand-text-group">
           <span class="brand-title">Legado de Salta</span>
@@ -2350,7 +3052,7 @@
       </a>
 
       <nav class="nav-pill-shell" aria-label="Navegación Principal">
-        <a href="#top" class="nav-link active">Showcase</a>
+        <a href="#top" class="nav-link active">Inicio</a>
         <a href="#coleccion" class="nav-link">La Boutique</a>
         <a href="#atelier" class="nav-link">El Atelier</a>
         <a href="#cuidados" class="nav-link">Artesanía</a>
@@ -2416,7 +3118,7 @@
 
         <div class="hero-cta-group">
           <button class="cta-btn" id="ctaBtn" type="button">
-            <span>Añadir a la bolsa</span>
+            <span>Agregar a la bolsa</span>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
@@ -2458,6 +3160,7 @@
     <!-- Hero Footer -->
     <div class="hero-footer hero-intro" style="--d: 420ms">
       <div class="social-links" aria-label="Redes Sociales">
+        <!-- Ocultos hasta tener los perfiles: poner el link en href y quitar estos comentarios
         <a href="#contacto" class="social-btn" aria-label="Instagram">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -2470,6 +3173,7 @@
             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
           </svg>
         </a>
+        -->
         <a href="#coleccion" class="social-btn" aria-label="Catálogo">
           <span style="font-family: var(--font-serif); font-size: 12px; font-weight: 700;">LS</span>
         </a>
@@ -2480,7 +3184,7 @@
         <p class="tagline-text">Distinción artesanal, envuelta en cuero noble</p>
       </div>
 
-      <span class="origin-stamp">Salta · Argentina</span>
+      <span class="origin-stamp">De Salta, Argentina, para el mundo</span>
     </div>
   </main>
 
@@ -2529,8 +3233,8 @@
             <circle cx="18.5" cy="18.5" r="2.5"></circle>
           </svg>
         </div>
-        <h3 class="pillar-title">Envío de Cortesía</h3>
-        <p class="pillar-desc">Entregas aseguradas a todo el país con funda protectora de lienzo y caja de presentación.</p>
+        <h3 class="pillar-title">De Salta al Mundo</h3>
+        <p class="pillar-desc">Envío sin cargo en toda Argentina y envíos internacionales asegurados, con funda de lienzo y caja de presentación.</p>
       </div>
     </div>
   </section>
@@ -2541,7 +3245,7 @@
       <span class="section-kicker">Colección Permanente &amp; Cápsulas</span>
       <h2 class="section-title">La Boutique <em>Legado de Salta</em></h2>
       <p class="section-subtitle">
-        Pasá el cursor sobre cada pieza para apreciar la textura real del cuero bajo luz cálida de taller, o abrí su ficha técnica para conocer sus dimensiones y detalles constructivos.
+        Cada pieza nace en nuestro taller de Salta y viaja a cualquier rincón del mundo. Abrí su ficha técnica para ver la textura real del cuero bajo luz cálida de taller, sus medidas y sus terminaciones.
       </p>
     </div>
 
@@ -2599,7 +3303,7 @@
         </div>
 
         <div class="atelier-copy">
-          <span class="section-kicker">Nuestra Herencia · Salta, Argentina</span>
+          <span class="section-kicker">Nuestra Herencia · De Salta para el mundo</span>
           <h2 class="section-title">El arte del cuero,<br /><em>elevado a joya cotidiana</em></h2>
           <blockquote class="atelier-quote">
             “En Salta, el cuero no es simplemente un material: es memoria, paisaje y oficio transmitido de generación en generación.”
@@ -2608,7 +3312,7 @@
             Cada cartera de <strong>Legado de Salta</strong> nace de la elección minuciosa de paños enteros de cuero vacuno legítimo. Respetamos las vetas orgánicas que hacen que ninguna pieza sea idéntica a otra.
           </p>
           <p class="section-subtitle">
-            Combinamos técnicas tradicionales del norte argentino —como el tiento trenzado a mano, los eslabones de cuero calados sin costura, las punteras reforzadas y las borlas cortadas a cuchillo— con una estética limpia, femenina y contemporánea pensada para acompañar toda la vida.
+            Combinamos técnicas tradicionales del norte argentino —como el tiento trenzado a mano, los eslabones de cuero calados sin costura, las punteras reforzadas y las borlas cortadas a cuchillo— con una estética limpia, femenina y contemporánea pensada para acompañarte toda la vida, estés donde estés.
           </p>
 
           <div class="atelier-metrics">
@@ -2627,6 +3331,35 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ==================== LOOKBOOK — ASÍ SE LLEVA ====================
+       Fotos: assets/lookbook-1.jpg … lookbook-4.jpg (verticales 4:5; la 4 horizontal).
+       La sección aparece sola cuando hay al menos una. -->
+  <section class="section-container lookbook-section" id="lookbook" hidden>
+    <div class="section-header">
+      <span class="section-kicker">Lookbook · De Salta al mundo</span>
+      <h2 class="section-title">Así se <em>lleva el Legado</em></h2>
+      <p class="section-subtitle">Piezas pensadas para acompañarte todos los días: del café de la mañana a una cena en cualquier ciudad del mundo.</p>
+    </div>
+    <div class="lookbook-grid">
+      <figure class="lookbook-item lookbook-item--tall" data-product="suela-marinera">
+        <img src="assets/lookbook-1.jpg" alt="Marinera Suela Patinada sobre el pasto de los cerros" decoding="async" />
+        <figcaption><span>Marinera Suela Patinada</span><button type="button" data-look>Ver pieza</button></figcaption>
+      </figure>
+      <figure class="lookbook-item" data-product="tote-trenzada-oro">
+        <img src="assets/lookbook-2.jpg" alt="Ilustración de mujer llevando la Tote Trenzada Chocolate y Oro" decoding="async" />
+        <figcaption><span>Tote Trenzada Chocolate &amp; Oro</span><button type="button" data-look>Ver pieza</button></figcaption>
+      </figure>
+      <figure class="lookbook-item" data-product="bandolera-eslabones-oro">
+        <img src="assets/lookbook-3.jpg" alt="Ilustración de mujer con la Mini Bandolera Eslabones y Cadena Oro cruzada" decoding="async" />
+        <figcaption><span>Mini Bandolera Eslabones &amp; Cadena Oro</span><button type="button" data-look>Ver pieza</button></figcaption>
+      </figure>
+      <figure class="lookbook-item lookbook-item--wide" data-product="mini-marinera-croco">
+        <img src="assets/lookbook-4.jpg" alt="Ilustración de mujer con la Mini Marinera Croco Nocturno en una salida de noche" decoding="async" />
+        <figcaption><span>Mini Marinera Croco Nocturno</span><button type="button" data-look>Ver pieza</button></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -2676,11 +3409,11 @@
 
         <div class="accordion-item">
           <button class="accordion-trigger" type="button">
-            <span>4. Envíos a todo el país, medios de pago y cambios</span>
+            <span>4. Envíos a Argentina y al mundo, pagos y cambios</span>
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-content">
-            Despachamos sin cargo a toda la Argentina mediante correo prioritario asegurado (24 hs en Salta y NOA, 3 a 5 días hábiles al resto del país). Ofrecemos 3 y 6 cuotas sin interés con todas las tarjetas bancarias, 15% de descuento por transferencia y 30 días corridos para cambios.
+            <strong>En Argentina</strong> el envío es sin cargo, por correo prioritario asegurado (24 hs en Salta y el NOA, 3 a 5 días hábiles al resto del país), con 3 y 6 cuotas sin interés con todas las tarjetas bancarias y 15% de descuento por transferencia. <strong>Al resto del mundo</strong> enviamos por courier internacional asegurado y con seguimiento: te cotizamos el costo y el plazo según tu destino, y coordinamos el pago por WhatsApp. En todos los casos tenés 30 días corridos para cambios.
           </div>
         </div>
       </div>
@@ -2745,7 +3478,7 @@
         <span class="section-kicker">Atención Personalizada &amp; Showroom</span>
         <h2 class="section-title" style="font-size: 38px;">Concierge <em>Legado de Salta</em></h2>
         <p class="section-subtitle">
-          ¿Deseás recibir un video en detalle de alguna cartera bajo luz natural, personalizar el grabado de iniciales o agendar una visita privada en nuestro Showroom de Salta?
+          Estés en Salta o en cualquier parte del mundo: ¿querés ver un video en detalle de alguna cartera bajo luz natural, personalizar el grabado de iniciales, cotizar un envío internacional o agendar una visita privada en nuestro Showroom de Salta?
         </p>
 
         <div class="concierge-info-list">
@@ -2755,7 +3488,7 @@
           </div>
           <div class="concierge-info-item">
             <span class="info-kicker">WhatsApp Concierge Directo</span>
-            <span class="info-val">+54 9 387 500-0000 · Lun a Sáb de 10 a 20 hs</span>
+            <span class="info-val">+54 9 387 412-1739 · Lun a Sáb de 10 a 20 hs (hora de Argentina, GMT−3)</span>
           </div>
           <div class="concierge-info-item">
             <span class="info-kicker">Correo Electrónico</span>
@@ -2767,7 +3500,7 @@
       <form class="concierge-form" id="conciergeForm">
         <div class="form-row">
           <input type="text" class="form-input" name="nombre" placeholder="Nombre y Apellido" autocomplete="name" required />
-          <input type="tel" class="form-input" name="telefono" placeholder="WhatsApp / Teléfono" autocomplete="tel" required />
+          <input type="tel" class="form-input" name="telefono" placeholder="WhatsApp (con código de país)" autocomplete="tel" required />
         </div>
         <select class="form-select" name="motivo" aria-label="Motivo de la consulta">
           <option value="Marinera Suela Patinada">Consulta por: Marinera Suela Patinada</option>
@@ -2780,9 +3513,10 @@
           <option value="Mini Marinera Croco Nocturno">Consulta por: Mini Marinera Croco Nocturno</option>
           <option value="Bandolera Índigo con Correa de Eslabones">Consulta por: Bandolera Índigo con Correa de Eslabones</option>
           <option value="Morral Bicolor Tierra & Visón">Consulta por: Morral Bicolor Tierra &amp; Visón</option>
+          <option value="Envío internacional">Cotizar un envío internacional</option>
           <option value="Cita en Showroom Salta">Agendar cita en Showroom de Salta</option>
         </select>
-        <textarea class="form-textarea" name="mensaje" aria-label="Tu consulta" placeholder="Escribí tu consulta o indicanos si deseás grabado de iniciales..."></textarea>
+        <textarea class="form-textarea" name="mensaje" aria-label="Tu consulta" placeholder="Escribí tu consulta y contanos desde qué país nos escribís..."></textarea>
         <button type="submit" class="cta-btn" style="justify-content: center; width: 100%;">
           Enviar consulta al Atelier
         </button>
@@ -2796,7 +3530,7 @@
       <div>
         <div class="footer-brand-title">Legado de Salta</div>
         <p class="footer-desc">
-          Marroquinería de autor en cuero vacuno legítimo. Piezas concebidas y cosidas a mano en Salta, fusionando nobleza artesanal y elegancia contemporánea.
+          Marroquinería de autor en cuero vacuno legítimo. Piezas concebidas y cosidas a mano en Salta, Argentina, para quienes valoran el oficio en cualquier lugar del mundo.
         </p>
       </div>
 
@@ -2815,7 +3549,7 @@
         <ul class="footer-links">
           <li><a href="#atelier">Nuestro Atelier en Salta</a></li>
           <li><a href="#cuidados">Cuidado del Cuero</a></li>
-          <li><a href="#cuidados">Envíos y Cambios</a></li>
+          <li><a href="#cuidados">Envíos Nacionales e Internacionales</a></li>
           <li><a href="#contacto">Cita en Showroom</a></li>
         </ul>
       </div>
@@ -2834,7 +3568,7 @@
 
     <div class="footer-bottom">
       <span>© 2026 Legado de Salta — Marroquinería de Autor en Cuero. Todos los derechos reservados.</span>
-      <span>Salta · República Argentina</span>
+      <span>Hecho en Salta, Argentina · Enviamos al mundo</span>
     </div>
   </footer>
 
@@ -2842,26 +3576,82 @@
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="cart-drawer" id="cartDrawer" aria-label="Bolsa de Compras" aria-hidden="true">
     <div class="drawer-header">
-      <h3 class="drawer-title">Tu Selección</h3>
+      <div>
+        <h3 class="drawer-title">Tu Bolsa</h3>
+        <span class="drawer-count" id="drawerCount">0 piezas</span>
+      </div>
       <button class="drawer-close" id="drawerClose" type="button" aria-label="Cerrar bolsa">✕</button>
     </div>
     <div class="drawer-shipping-banner">
-      <span>✦</span>
-      <span>Contás con <strong>Envío Asegurado de Cortesía</strong> y funda de lienzo incluida.</span>
+      <span aria-hidden="true">✦</span>
+      <span><strong>Envío sin cargo en Argentina</strong> · al exterior lo cotizamos según tu destino.</span>
     </div>
-    <div class="drawer-items" id="drawerItems"></div>
-    <div class="drawer-footer">
-      <label class="gift-note-check">
-        <input type="checkbox" id="giftNoteCheck" checked />
-        <span>Incluir estuche de regalo y tarjeta caligrafiada sin cargo</span>
-      </label>
+
+    <div class="drawer-scroll" id="drawerScroll">
+      <div class="drawer-items" id="drawerItems"></div>
+
+      <form class="order-details" id="orderForm" novalidate>
+        <h4 class="order-details-title">Datos para tu pedido</h4>
+        <label class="order-field">
+          <span>Tu nombre</span>
+          <input type="text" class="form-input" name="nombre" id="orderName" autocomplete="name" placeholder="Nombre y apellido" required />
+        </label>
+        <label class="order-field">
+          <span>¿A dónde lo enviamos?</span>
+          <input type="text" class="form-input" name="destino" id="orderDestino" autocomplete="address-level2" placeholder="Ciudad, provincia / país" required />
+        </label>
+        <fieldset class="order-field">
+          <legend>Forma de pago</legend>
+          <div class="pay-options" id="payOptions">
+            <label class="pay-option">
+              <input type="radio" name="pago" value="transferencia" checked />
+              <span><strong>Transferencia</strong><small>15% OFF · Argentina</small></span>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="pago" value="cuotas" />
+              <span><strong>Tarjeta en cuotas</strong><small>3 y 6 sin interés · Argentina</small></span>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="pago" value="exterior" />
+              <span><strong>Desde el exterior</strong><small>Lo coordinamos por WhatsApp</small></span>
+            </label>
+          </div>
+        </fieldset>
+        <label class="gift-note-check">
+          <input type="checkbox" id="giftNoteCheck" checked />
+          <span>Estuche de regalo y tarjeta caligrafiada sin cargo</span>
+        </label>
+        <label class="order-field">
+          <span>Nota (opcional)</span>
+          <textarea class="form-textarea" name="nota" id="orderNota" rows="2" placeholder="Iniciales para grabar, fecha en que lo necesitás..."></textarea>
+        </label>
+      </form>
+    </div>
+
+    <div class="drawer-footer" id="drawerFooter">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="drawerSubtotalVal">$0</span>
+      </div>
+      <div class="summary-row summary-discount" id="discountRow">
+        <span>15% OFF transferencia</span>
+        <span id="drawerDiscountVal">−$0</span>
+      </div>
+      <div class="summary-row">
+        <span>Envío</span>
+        <span id="drawerShippingVal">Sin cargo en Argentina</span>
+      </div>
       <div class="drawer-total-row">
-        <span class="drawer-total-label">Subtotal Estimado</span>
+        <span class="drawer-total-label">Total estimado</span>
         <span class="drawer-total-val" id="drawerTotalVal">$0</span>
       </div>
       <button class="checkout-whatsapp-btn" id="checkoutWhatsappBtn" type="button">
-        Finalizar Pedido por WhatsApp Concierge
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.460 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.8h-.01a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.71.97.99-3.62-.23-.37a9.78 9.78 0 0 1-1.5-5.22c0-5.41 4.4-9.82 9.82-9.82 2.62 0 5.08 1.02 6.93 2.88a9.75 9.75 0 0 1 2.87 6.94c0 5.41-4.410 9.82-9.810 9.82zm8.35-18.17A11.73 11.73 0 0 0 12.04 0C5.54 0 .25 5.29.25 11.79c0 2.08.54 4.11 1.58 5.9L.15 24l6.46-1.69a11.77 11.77 0 0 0 5.63 1.43h.01c6.5 0 11.79-5.29 11.79-11.79 0-3.15-1.23-6.11-3.45-8.34z"/>
+        </svg>
+        <span>Enviar pedido por WhatsApp</span>
       </button>
+      <p class="checkout-note">Se abre WhatsApp con tu pedido listo. Ahí confirmamos stock, envío y pago, sin compromiso.</p>
     </div>
   </aside>
 
@@ -2884,8 +3674,17 @@
 
         <ul class="specs-list" id="modalSpecs"></ul>
 
+        <div class="modal-format">
+          <span class="selector-label">Formato de correa</span>
+          <div class="size-options" id="modalFormats" role="radiogroup" aria-label="Formato de correa">
+            <button class="size-btn" type="button" data-size="Clásica" role="radio">Clásica</button>
+            <button class="size-btn" type="button" data-size="Galón" role="radio">Galón</button>
+            <button class="size-btn" type="button" data-size="Doble" role="radio">Doble</button>
+          </div>
+        </div>
+
         <button class="cta-btn" id="modalAddBtn" type="button" style="justify-content: center; width: 100%;">
-          Añadir esta pieza a la bolsa
+          Agregar esta pieza a la bolsa
         </button>
       </div>
     </div>
@@ -2894,6 +3693,7 @@
   <!-- Toast Notification -->
   <div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
 
+  <script src="config.js"></script>
   <script>
     /**
      * Catálogo Oficial Completo de LEGADO DE SALTA (10 Piezas Reales)
@@ -3115,7 +3915,9 @@
 
     const HERO_BAGS = PRODUCTS.filter((p) => p.inHero);
     const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const WHATSAPP_NUMBER = '5493875000000'; // TODO: reemplazar por el número real
+    const SITE_CONFIG = window.LEGADO_CONFIG || {};
+    const WHATSAPP_NUMBER = SITE_CONFIG.whatsapp || '5493874121739';
+    const ORDERS_ENDPOINT = SITE_CONFIG.pedidosUrl || '';
     const AUTOPLAY_MS = 5200;
     const SLIDE_LOCK_MS = 650;
 
@@ -3405,9 +4207,9 @@
       else if (e.key === 'ArrowLeft') { goPrev(); restartAutoplay(); }
     });
 
-    document.querySelectorAll('.size-btn').forEach((btn) => {
+    document.querySelectorAll('.hero-right .size-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.size-btn').forEach((b) => {
+        document.querySelectorAll('.hero-right .size-btn').forEach((b) => {
           b.classList.remove('active');
           b.setAttribute('aria-checked', 'false');
         });
@@ -3418,7 +4220,7 @@
     });
 
     ctaBtn.addEventListener('click', () => addToCart(HERO_BAGS[activeIndex], selectedFormat));
-    heroQuickviewBtn.addEventListener('click', () => openProductModal(HERO_BAGS[activeIndex]));
+    heroQuickviewBtn.addEventListener('click', () => openProductModal(HERO_BAGS[activeIndex], selectedFormat));
 
     function showToast(msg) {
       cartToast.textContent = msg;
@@ -3562,7 +4364,7 @@
                 <span class="product-price">${prod.price}</span>
                 <span class="product-installments">6 cuotas sin interés de ${formatARS(prod.priceNum / 6)}</span>
               </div>
-              <button class="add-bag-btn" type="button" data-add>Añadir</button>
+              <button class="add-bag-btn" type="button" data-add>Agregar</button>
             </div>
           </div>
         `;
@@ -3610,12 +4412,52 @@
     const cartDrawer = $('cartDrawer');
     const drawerClose = $('drawerClose');
     const drawerItems = $('drawerItems');
+    const drawerCount = $('drawerCount');
+    const drawerScroll = $('drawerScroll');
+    const drawerSubtotalVal = $('drawerSubtotalVal');
+    const drawerDiscountVal = $('drawerDiscountVal');
+    const drawerShippingVal = $('drawerShippingVal');
+    const discountRow = $('discountRow');
     const drawerTotalVal = $('drawerTotalVal');
     const checkoutWhatsappBtn = $('checkoutWhatsappBtn');
     const giftNoteCheck = $('giftNoteCheck');
+    const orderForm = $('orderForm');
+    const orderName = $('orderName');
+    const orderDestino = $('orderDestino');
+    const orderNota = $('orderNota');
 
     const CART_KEY = 'legado-salta-cart';
+    const CUSTOMER_KEY = 'legado-salta-cliente';
+    const TRANSFER_DISCOUNT = 0.15;
+    const PAY_LABELS = {
+      transferencia: 'Transferencia bancaria (15% OFF)',
+      cuotas: 'Tarjeta en cuotas sin interés',
+      exterior: 'Pago desde el exterior (a coordinar)'
+    };
     let cart = [];
+
+    const selectedPay = () => (orderForm.querySelector('input[name="pago"]:checked') || {}).value || 'transferencia';
+
+    // Recordamos nombre y destino para la próxima compra
+    function saveCustomer() {
+      try {
+        localStorage.setItem(CUSTOMER_KEY, JSON.stringify({
+          nombre: orderName.value.trim(),
+          destino: orderDestino.value.trim(),
+          pago: selectedPay()
+        }));
+      } catch (_) { /* almacenamiento no disponible */ }
+    }
+
+    function loadCustomer() {
+      try {
+        const c = JSON.parse(localStorage.getItem(CUSTOMER_KEY) || '{}');
+        if (c.nombre) orderName.value = c.nombre;
+        if (c.destino) orderDestino.value = c.destino;
+        const radio = c.pago && orderForm.querySelector(`input[name="pago"][value="${c.pago}"]`);
+        if (radio) radio.checked = true;
+      } catch (_) { /* sin datos guardados */ }
+    }
 
     function saveCart() {
       try {
@@ -3674,7 +4516,7 @@
       saveCart();
       renderCart();
       bumpBadge();
-      showToast(`${product.modelName} añadida a tu bolsa`);
+      showToast(`${product.modelName} agregada a tu bolsa`);
       if (!cartDrawer.classList.contains('open')) {
         // Si viene desde el modal, cerrar primero para no apilar paneles
         if (modalBackdrop.classList.contains('open')) closeProductModal();
@@ -3682,76 +4524,221 @@
       }
     }
 
-    function updateQty(key, delta) {
+    function removeItem(key) {
       const idx = cart.findIndex((i) => i.key === key);
       if (idx === -1) return;
-      cart[idx].qty += delta;
-      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      cart.splice(idx, 1);
       saveCart();
       renderCart();
     }
 
+    function updateQty(key, delta) {
+      const item = cart.find((i) => i.key === key);
+      if (!item) return;
+      if (item.qty + delta <= 0) {
+        animateRemove(key);
+        return;
+      }
+      item.qty += delta;
+      saveCart();
+      renderCart();
+    }
+
+    // La fila sale deslizándose antes de quitarla de la bolsa
+    function animateRemove(key) {
+      const row = drawerItems.querySelector(`.cart-item-row[data-key="${CSS.escape(key)}"]`);
+      if (!row || REDUCED_MOTION) {
+        removeItem(key);
+        return;
+      }
+      row.classList.add('removing');
+      let removed = false;
+      const finish = () => {
+        if (removed) return;
+        removed = true;
+        removeItem(key);
+      };
+      row.addEventListener('animationend', finish, { once: true });
+      setTimeout(finish, 450); // respaldo si el navegador pausa la animación
+    }
+
     drawerItems.addEventListener('click', (e) => {
-      const btn = e.target.closest('.qty-btn');
-      if (!btn) return;
-      updateQty(btn.closest('.cart-item-row').dataset.key, parseInt(btn.dataset.delta, 10));
+      if (e.target.closest('[data-browse]')) {
+        closeCartDrawer();
+        document.getElementById('coleccion').scrollIntoView({ behavior: REDUCED_MOTION ? 'auto' : 'smooth' });
+        return;
+      }
+      const row = e.target.closest('.cart-item-row');
+      if (!row) return;
+      if (e.target.closest('.cart-item-remove')) animateRemove(row.dataset.key);
+      else if (e.target.closest('.qty-btn')) updateQty(row.dataset.key, parseInt(e.target.closest('.qty-btn').dataset.delta, 10));
     });
+
+    const cartSubtotal = () => cart.reduce((acc, i) => acc + i.product.priceNum * i.qty, 0);
+    const piecesLabel = (n) => `${n} ${n === 1 ? 'pieza' : 'piezas'}`;
+
+    function getTotals() {
+      const subtotal = cartSubtotal();
+      const pay = selectedPay();
+      const discount = pay === 'transferencia' ? Math.round(subtotal * TRANSFER_DISCOUNT) : 0;
+      return { subtotal, discount, total: subtotal - discount, pay };
+    }
+
+    function renderSummary() {
+      const { subtotal, discount, total, pay } = getTotals();
+      drawerSubtotalVal.textContent = formatARS(subtotal);
+      discountRow.hidden = discount === 0;
+      drawerDiscountVal.textContent = '−' + formatARS(discount);
+      drawerShippingVal.textContent = pay === 'exterior' ? 'A cotizar según destino' : 'Sin cargo en Argentina';
+      drawerTotalVal.textContent = formatARS(total);
+    }
 
     function renderCart() {
       const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
       cartBadge.textContent = totalItems;
       cartBadge.dataset.count = totalItems;
-      cartBtn.setAttribute('aria-label', `Abrir bolsa de compras (${totalItems} ${totalItems === 1 ? 'pieza' : 'piezas'})`);
+      cartBtn.setAttribute('aria-label', `Abrir bolsa de compras (${piecesLabel(totalItems)})`);
+      drawerCount.textContent = piecesLabel(totalItems);
+      cartDrawer.classList.toggle('is-empty', cart.length === 0);
 
       if (cart.length === 0) {
         drawerItems.innerHTML = `
           <div class="drawer-empty">
             <p style="font-family: var(--font-serif); font-size: 22px; color: var(--espresso-deep); margin-bottom: 8px;">Tu bolsa está vacía</p>
-            <p>Explorá nuestras carteras artesanales en cuero vacuno y seleccioná tu pieza favorita.</p>
+            <p>Explorá nuestras carteras artesanales en cuero vacuno y elegí tu pieza favorita.</p>
+            <button class="cta-btn drawer-empty-cta" type="button" data-browse>Ver la colección</button>
           </div>
         `;
-        drawerTotalVal.textContent = '$0';
         return;
       }
 
-      let subtotal = 0;
-      drawerItems.innerHTML = cart.map((item, i) => {
-        const lineTotal = item.product.priceNum * item.qty;
-        subtotal += lineTotal;
-        return `
+      drawerItems.innerHTML = cart.map((item, i) => `
           <div class="cart-item-row" data-key="${item.key}" style="--i: ${i}">
             <img src="${item.product.image}" alt="${item.product.modelName}" class="cart-item-thumb" />
             <div>
               <div class="cart-item-name">${item.product.modelName}</div>
-              <div class="cart-item-meta">Correa: ${item.format} · Hecho en Salta</div>
-              <div class="qty-controls">
-                <button class="qty-btn" type="button" data-delta="-1" aria-label="Quitar una">−</button>
-                <span class="qty-val">${item.qty}</span>
-                <button class="qty-btn" type="button" data-delta="1" aria-label="Agregar una">+</button>
+              <div class="cart-item-meta">Correa ${item.format} · ${formatARS(item.product.priceNum)} c/u</div>
+              <div class="cart-item-actions">
+                <div class="qty-controls">
+                  <button class="qty-btn" type="button" data-delta="-1" aria-label="Quitar una unidad">−</button>
+                  <span class="qty-val" aria-label="Cantidad">${item.qty}</span>
+                  <button class="qty-btn" type="button" data-delta="1" aria-label="Agregar una unidad">+</button>
+                </div>
+                <button class="cart-item-remove" type="button">Quitar</button>
               </div>
             </div>
-            <div class="cart-item-price">${formatARS(lineTotal)}</div>
-          </div>`;
-      }).join('');
+            <div class="cart-item-price">${formatARS(item.product.priceNum * item.qty)}</div>
+          </div>`).join('');
 
-      drawerTotalVal.textContent = formatARS(subtotal);
+      renderSummary();
     }
 
-    const openWhatsApp = (text) =>
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+    orderForm.addEventListener('change', () => { renderSummary(); saveCustomer(); });
+    orderForm.addEventListener('input', (e) => e.target.classList.remove('invalid'));
+    orderForm.addEventListener('submit', (e) => { e.preventDefault(); checkoutWhatsappBtn.click(); });
+
+    function openWhatsApp(text) {
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      const win = window.open(url, '_blank');
+      if (win) win.opener = null;
+      else window.location.href = url; // si el navegador bloquea la ventana nueva
+    }
+
+    function requireField(input) {
+      if (input.value.trim()) return true;
+      input.classList.remove('invalid');
+      void input.offsetWidth;
+      input.classList.add('invalid');
+      return false;
+    }
+
+    // Número corto para identificar el pedido en la conversación
+    const orderCode = () => 'LS-' + Date.now().toString(36).slice(-5).toUpperCase();
+
+    function buildOrderMessage(code) {
+      const { subtotal, discount, total, pay } = getTotals();
+      const lines = cart.map(
+        (i) => `• ${i.qty} × ${i.product.modelName} — Correa ${i.format} — ${formatARS(i.product.priceNum * i.qty)}`
+      );
+      const nota = orderNota.value.trim();
+      return [
+        `¡Hola, Legado de Salta! 👋 Quiero hacer este pedido:`,
+        ``,
+        `🛍️ *Pedido ${code}*`,
+        ...lines,
+        ``,
+        `Subtotal: ${formatARS(subtotal)}`,
+        ...(discount ? [`15% OFF transferencia: −${formatARS(discount)}`] : []),
+        `*Total estimado: ${formatARS(total)}*`,
+        ``,
+        `👤 Nombre: ${orderName.value.trim()}`,
+        `📍 Envío a: ${orderDestino.value.trim()}`,
+        `💳 Pago: ${PAY_LABELS[pay]}`,
+        `🎁 Presentación: ${giftNoteCheck.checked ? 'Con estuche de regalo y tarjeta caligrafiada' : 'Estándar'}`,
+        ...(nota ? [`📝 Nota: ${nota}`] : []),
+        ``,
+        `¿Me confirman stock y cómo seguimos? ¡Gracias!`
+      ].join('\n');
+    }
 
     checkoutWhatsappBtn.addEventListener('click', () => {
       if (cart.length === 0) {
         showToast('Agregá al menos una cartera para iniciar el pedido');
         return;
       }
-      const lines = cart.map(
-        (i) => `• ${i.qty}x ${i.product.modelName} (Correa ${i.format}) — ${formatARS(i.product.priceNum * i.qty)}`
-      );
-      const total = cart.reduce((acc, i) => acc + i.product.priceNum * i.qty, 0);
-      const gift = giftNoteCheck.checked ? 'Sí, con estuche de regalo y tarjeta caligrafiada' : 'Presentación estándar';
-      openWhatsApp(`Hola Legado de Salta! Deseo encargar las siguientes piezas de su tienda:\n\n${lines.join('\n')}\n\nSubtotal: ${formatARS(total)}\nPresentación: ${gift}`);
+      const okName = requireField(orderName);
+      const okDestino = requireField(orderDestino);
+      if (!okName || !okDestino) {
+        const first = okName ? orderDestino : orderName;
+        first.scrollIntoView({ behavior: REDUCED_MOTION ? 'auto' : 'smooth', block: 'center' });
+        first.focus({ preventScroll: true });
+        showToast('Completá tu nombre y a dónde enviamos el pedido');
+        return;
+      }
+      saveCustomer();
+      const code = orderCode();
+      recordOrder(code);
+      openWhatsApp(buildOrderMessage(code));
+      showToast('Te abrimos WhatsApp con tu pedido listo para enviar');
     });
+
+    // ==================== REGISTRO DE PEDIDOS (dashboard pedidos.html) ====================
+    const LOCAL_ORDERS_KEY = 'legado-salta-pedidos';
+
+    function recordOrder(code) {
+      const { subtotal, discount, total, pay } = getTotals();
+      const order = {
+        codigo: code,
+        fecha: new Date().toISOString(),
+        nombre: orderName.value.trim(),
+        destino: orderDestino.value.trim(),
+        pago: PAY_LABELS[pay],
+        regalo: giftNoteCheck.checked ? 'Sí' : 'No',
+        nota: orderNota.value.trim(),
+        items: cart.map((i) => `${i.qty} × ${i.product.modelName} (Correa ${i.format})`).join('\n'),
+        piezas: cart.reduce((acc, i) => acc + i.qty, 0),
+        subtotal,
+        descuento: discount,
+        total,
+        estado: 'Nuevo'
+      };
+
+      // Copia local: permite probar el dashboard en este navegador
+      try {
+        const list = JSON.parse(localStorage.getItem(LOCAL_ORDERS_KEY) || '[]');
+        list.push(order);
+        localStorage.setItem(LOCAL_ORDERS_KEY, JSON.stringify(list.slice(-200)));
+      } catch (_) { /* almacenamiento no disponible */ }
+
+      // Planilla de Google: queda registrado aunque el cliente no envíe el WhatsApp
+      if (!ORDERS_ENDPOINT) return;
+      try {
+        const body = JSON.stringify({ action: 'nuevo', pedido: order });
+        if (!(navigator.sendBeacon && navigator.sendBeacon(ORDERS_ENDPOINT, new Blob([body], { type: 'text/plain' })))) {
+          fetch(ORDERS_ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain' }, body });
+        }
+      } catch (_) { /* el pedido igual sale por WhatsApp */ }
+    }
 
     // ==================== QUICKVIEW PRODUCT MODAL ====================
     const modalBackdrop = $('modalBackdrop');
@@ -3788,9 +4775,24 @@
       viewEditorialBtn.setAttribute('aria-pressed', String(editorial));
     }
 
-    function openProductModal(prod) {
+    const modalFormatBtns = [...document.querySelectorAll('#modalFormats .size-btn')];
+    let modalFormat = 'Clásica';
+
+    function setModalFormat(format) {
+      modalFormat = format;
+      modalFormatBtns.forEach((b) => {
+        const on = b.dataset.size === format;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+    }
+
+    modalFormatBtns.forEach((b) => b.addEventListener('click', () => setModalFormat(b.dataset.size)));
+
+    function openProductModal(prod, format = 'Clásica') {
       lastFocused = document.activeElement;
       currentModalProduct = prod;
+      setModalFormat(format);
       modalMainImg.classList.remove('swapping');
       modalMainImg.src = prod.image;
       modalMainImg.alt = prod.modelName;
@@ -3843,7 +4845,7 @@
       if (!currentModalProduct) return;
       const prod = currentModalProduct;
       closeProductModal();
-      addToCart(prod, selectedFormat);
+      addToCart(prod, modalFormat);
     });
 
     modalClose.addEventListener('click', closeProductModal);
@@ -3888,11 +4890,71 @@
       });
     });
 
+    // ==================== LOOKBOOK ====================
+    // Muestra solo las fotos que existen; si no hay ninguna, la sección queda oculta
+    const lookbook = $('lookbook');
+    let lookLoaded = 0;
+    lookbook.querySelectorAll('.lookbook-item').forEach((fig) => {
+      const img = fig.querySelector('img');
+      const done = (ok) => {
+        if (!ok) {
+          fig.remove();
+          return;
+        }
+        lookLoaded += 1;
+        if (lookLoaded === 1) lookbook.hidden = false;
+      };
+      if (img.complete) done(img.naturalWidth > 0);
+      else {
+        img.addEventListener('load', () => done(true), { once: true });
+        img.addEventListener('error', () => done(false), { once: true });
+      }
+    });
+
+    lookbook.addEventListener('click', (e) => {
+      if (!e.target.closest('[data-look]')) return;
+      const prod = PRODUCTS.find((p) => p.id === e.target.closest('.lookbook-item').dataset.product);
+      if (prod) openProductModal(prod);
+    });
+
+    // ==================== BANNER CAMPO ====================
+    const campoBanner = $('campo');
+    const campoImg = campoBanner.querySelector('.campo-media img');
+
+    campoBanner.querySelector('[data-campo-product]').addEventListener('click', (e) => {
+      const prod = PRODUCTS.find((p) => p.id === e.currentTarget.dataset.campoProduct);
+      if (prod) openProductModal(prod);
+    });
+
+    // Parallax suave: la foto se desplaza más lento que la página (solo en pantallas grandes)
+    const parallaxMQ = window.matchMedia('(min-width: 861px)');
+    let parallaxTicking = false;
+    function updateParallax() {
+      parallaxTicking = false;
+      if (!parallaxMQ.matches) {
+        campoImg.style.removeProperty('--parallax');
+        return;
+      }
+      const r = campoBanner.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      const progress = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+      campoImg.style.setProperty('--parallax', `${(progress * -60).toFixed(1)}px`);
+    }
+    if (!REDUCED_MOTION) {
+      window.addEventListener('scroll', () => {
+        if (!parallaxTicking) {
+          parallaxTicking = true;
+          requestAnimationFrame(updateParallax);
+        }
+      }, { passive: true });
+      updateParallax();
+    }
+
     // ==================== FORMS ====================
     document.getElementById('conciergeForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const fd = new FormData(e.target);
-      const text = `Hola Legado de Salta! Soy ${fd.get('nombre')} (${fd.get('telefono')}).\n` +
+      const text = `¡Hola, Legado de Salta! Soy ${fd.get('nombre')} (${fd.get('telefono')}).\n` +
         `Consulta: ${fd.get('motivo')}\n\n${fd.get('mensaje') || ''}`.trim();
       openWhatsApp(text);
       showToast('Abrimos WhatsApp con tu consulta para el Atelier');
@@ -3902,7 +4964,7 @@
     document.getElementById('newsletterForm').addEventListener('submit', (e) => {
       e.preventDefault();
       // TODO: conectar con un servicio de newsletter (Mailchimp, Brevo, etc.)
-      showToast('Bienvenida al Journal Privado de Legado de Salta');
+      showToast('¡Gracias por sumarte al Journal Privado de Legado de Salta!');
       e.target.reset();
     });
 
@@ -3940,6 +5002,8 @@
     markReveal('.collage-card', { stagger: 160 });
     markReveal('.collage-seal-badge', { mode: 'scale' });
     markReveal('.atelier-copy > *', { stagger: 80 });
+    markReveal('.campo-banner');
+    markReveal('.lookbook-item', { stagger: 140 });
     markReveal('.care-feature-box');
     markReveal('.accordion-item', { stagger: 90 });
     markReveal('.testimonial-card', { stagger: 120 });
@@ -4013,8 +5077,21 @@
       }
     }, { passive: true });
 
+    // La animación de entrada se quita al terminar: así no se repite al volver
+    // a la barra normal y no tapa la animación de la barra fija (navDrop)
+    document.querySelectorAll('.hero-intro').forEach((el) => {
+      el.addEventListener('animationend', (e) => {
+        if (e.animationName === 'heroIn') el.classList.remove('hero-intro');
+      });
+    });
+    // Respaldo por si el evento no llega (pestaña en segundo plano, movimiento reducido)
+    setTimeout(() => {
+      document.querySelectorAll('.hero-intro').forEach((el) => el.classList.remove('hero-intro'));
+    }, REDUCED_MOTION ? 0 : 2000);
+
     // ==================== INIT ====================
     loadCart();
+    loadCustomer();
     updateCarouselSlots('init');
     renderCatalog(false);
     renderCart();
