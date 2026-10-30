@@ -9,3 +9,7 @@ index-respaldo-*.html
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Pruebas locales
+.playwright-mcp/
+.taste-skill/

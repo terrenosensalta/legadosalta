@@ -27,8 +27,8 @@
       --espresso-deep: #1e1612;
       --espresso-mid: #4a3528;
       --text-body: #5c4b40;
-      --text-muted: #928276;
-      --gold-accent: #9e7b4f;
+      --text-muted: #736458;
+      --gold-accent: #7f613c;
       --gold-light: #c8ad88;
       --jacaranda: #7b6888;
       --border-delicate: rgba(74, 53, 40, 0.12);
@@ -50,6 +50,15 @@
       scroll-behavior: smooth;
     }
 
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    ::selection {
+      background: var(--espresso-deep);
+      color: #f4efe8;
+    }
+
     body {
       width: 100%;
       min-height: 100vh;
@@ -63,24 +72,19 @@
     .announcement-bar {
       background: var(--espresso-deep);
       color: #f7f3ee;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-transform: none;
       text-align: center;
       padding: 9px 16px;
-      border-bottom: 1px solid rgba(158, 123, 79, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 24px;
+      gap: 40px;
       flex-wrap: wrap;
     }
 
-    .announcement-sep {
-      color: var(--gold-light);
-      opacity: 0.7;
-    }
 
     /* ==================== HERO ATELIER VIEWPORT ==================== */
     .atelier-viewport {
@@ -100,38 +104,6 @@
       touch-action: pan-y;
     }
 
-    .ambient-bg {
-      position: absolute;
-      inset: 0;
-      z-index: -3;
-      pointer-events: none;
-      background: #ffffff;
-    }
-
-    .ambient-layer {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity var(--transition-duration) var(--ease-couture);
-      will-change: opacity;
-    }
-
-    .ambient-layer.active {
-      opacity: 1;
-    }
-
-    .seal-watermark {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: min(550px, 50vw);
-      height: min(550px, 50vw);
-      transform: translate(-50%, -50%);
-      opacity: 0.032;
-      pointer-events: none;
-      z-index: -1;
-      object-fit: contain;
-    }
 
     /* ==================== TOP COUTURE NAVBAR ==================== */
     .navbar {
@@ -146,7 +118,6 @@
       width: 100%;
       margin: 0 auto;
       padding-bottom: 14px;
-      border-bottom: 1px solid rgba(74, 53, 40, 0.08);
     }
 
     .navbar.is-condensed {
@@ -219,19 +190,18 @@
 
     .brand-subtitle {
       font-family: var(--font-sans);
-      font-size: 8.5px;
+      font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold-accent);
       margin-top: 3px;
+      white-space: nowrap;
     }
 
     /* Center Delicate Pill Navigation */
     .nav-pill-shell {
-      background: rgba(250, 248, 245, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: var(--bg-ivory);
       border: 1px solid var(--border-delicate);
       border-radius: 999px;
       padding: 5px 7px;
@@ -246,9 +216,9 @@
       background: transparent;
       color: var(--text-body);
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 11.5px;
       font-weight: 500;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 9px 18px;
       border-radius: 999px;
@@ -266,7 +236,6 @@
       background: var(--espresso-deep);
       color: #ffffff;
       font-weight: 500;
-      box-shadow: 0 4px 14px rgba(30, 22, 18, 0.14);
     }
 
     /* Right Utility Actions */
@@ -323,7 +292,7 @@
       z-index: 20;
       flex: 1;
       display: grid;
-      grid-template-columns: minmax(290px, 380px) 1fr minmax(220px, 280px);
+      grid-template-columns: minmax(300px, 470px) 1fr minmax(220px, 280px);
       align-items: center;
       max-width: 1480px;
       width: 100%;
@@ -384,31 +353,14 @@
       letter-spacing: 0.08em;
     }
 
-    .collection-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold-accent);
-      margin-bottom: 10px;
-    }
 
-    .collection-eyebrow::before {
-      content: '';
-      width: 22px;
-      height: 1px;
-      background: var(--gold-accent);
-    }
 
     .hero-title {
       font-family: var(--font-serif);
-      font-size: clamp(38px, 4.1vw, 54px);
+      font-size: clamp(42px, 4.4vw, 66px);
       font-weight: 500;
-      line-height: 1.04;
-      letter-spacing: -0.01em;
+      line-height: 1;
+      letter-spacing: -0.015em;
       margin-bottom: 18px;
       color: var(--espresso-deep);
     }
@@ -420,11 +372,11 @@
     }
 
     .hero-desc {
-      font-size: 12.5px;
+      font-size: 16px;
       font-weight: 400;
-      line-height: 1.78;
+      line-height: 1.65;
       color: var(--text-body);
-      max-width: 355px;
+      max-width: 390px;
       margin-bottom: 28px;
     }
 
@@ -441,9 +393,9 @@
       background: var(--espresso-deep);
       color: #ffffff;
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       padding: 14px 26px;
       border-radius: 999px;
@@ -451,7 +403,6 @@
       align-items: center;
       gap: 10px;
       cursor: pointer;
-      box-shadow: 0 10px 26px rgba(30, 22, 18, 0.14);
       transition: all 0.3s var(--ease-couture);
     }
 
@@ -459,7 +410,6 @@
       background: var(--espresso-mid);
       border-color: var(--espresso-mid);
       transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(30, 22, 18, 0.2);
     }
 
     .cta-btn-secondary {
@@ -468,9 +418,9 @@
       background: rgba(255, 255, 255, 0.85);
       color: var(--espresso-deep);
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       padding: 14px 20px;
       border-radius: 999px;
@@ -503,10 +453,10 @@
     }
 
     .bag-material-tag {
-      font-size: 9.5px;
+      font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      text-transform: none;
       color: var(--gold-accent);
       margin-bottom: 18px;
     }
@@ -552,9 +502,9 @@
     }
 
     .installments-note {
-      font-size: 9.5px;
+      font-size: 13px;
       color: var(--gold-accent);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.01em;
       margin-top: 6px;
       font-weight: 500;
     }
@@ -568,11 +518,11 @@
     }
 
     .selector-label {
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      color: var(--text-body);
     }
 
     .swatch-list {
@@ -619,7 +569,7 @@
       background: #ffffff;
       color: var(--espresso-deep);
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 12.5px;
       font-weight: 500;
       letter-spacing: 0.06em;
       cursor: pointer;
@@ -637,7 +587,6 @@
       color: #ffffff;
       border-color: var(--espresso-deep);
       font-weight: 600;
-      box-shadow: 0 6px 18px rgba(30, 22, 18, 0.15);
     }
 
     /* ==================== 3D PRODUCT STAGE ==================== */
@@ -675,7 +624,7 @@
     /* Las posiciones de cada slot se expresan en "unidades de cartera" (--u),
        así el carrusel escala igual en celular, notebook y pantallas grandes. */
     .stage-layer {
-      --bag-w: clamp(300px, 30vw, 440px);
+      --bag-w: clamp(300px, 33vw, 480px);
       --u: calc(var(--bag-w) / 440);
     }
 
@@ -815,7 +764,6 @@
       width: 100%;
       margin: 0 auto;
       padding-top: 14px;
-      border-top: 1px solid rgba(74, 53, 40, 0.08);
     }
 
     .social-links {
@@ -864,7 +812,7 @@
 
     .tagline-text {
       font-family: var(--font-serif);
-      font-size: 17px;
+      font-size: 19px;
       font-style: italic;
       font-weight: 500;
       line-height: 1.25;
@@ -874,9 +822,9 @@
 
     .origin-stamp {
       justify-self: end;
-      font-size: 9.5px;
+      font-size: 11.5px;
       font-weight: 500;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
@@ -919,14 +867,14 @@
 
     .pillar-title {
       font-family: var(--font-serif);
-      font-size: 19px;
+      font-size: 21px;
       font-weight: 600;
       color: var(--espresso-deep);
       margin-bottom: 6px;
     }
 
     .pillar-desc {
-      font-size: 11.5px;
+      font-size: 15px;
       line-height: 1.65;
       color: var(--text-body);
       max-width: 260px;
@@ -945,15 +893,6 @@
       margin: 0 auto 54px;
     }
 
-    .section-kicker {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold-accent);
-      margin-bottom: 12px;
-    }
 
     .section-title {
       font-family: var(--font-serif);
@@ -970,8 +909,8 @@
     }
 
     .section-subtitle {
-      font-size: 13px;
-      line-height: 1.75;
+      font-size: 16px;
+      line-height: 1.7;
       color: var(--text-body);
     }
 
@@ -1000,9 +939,9 @@
       background: #ffffff;
       color: var(--text-body);
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 11.5px;
       font-weight: 500;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 10px 20px;
       border-radius: 999px;
@@ -1025,13 +964,13 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 11px;
+      font-size: 14px;
       color: var(--text-muted);
     }
 
     .sort-select {
       font-family: var(--font-sans);
-      font-size: 11px;
+      font-size: 14px;
       color: var(--espresso-deep);
       border: 1px solid var(--border-delicate);
       border-radius: 999px;
@@ -1042,9 +981,27 @@
     }
 
     .catalog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 36px;
+    }
+
+    .catalog-grid > .product-card {
+      flex: 0 1 calc((100% - 72px) / 3);
+      min-width: 280px;
+    }
+
+    @media (max-width: 1000px) {
+      .catalog-grid > .product-card {
+        flex-basis: calc((100% - 36px) / 2);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .catalog-grid > .product-card {
+        flex-basis: 100%;
+      }
     }
 
     .product-card {
@@ -1069,12 +1026,11 @@
       top: 16px;
       left: 16px;
       z-index: 5;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(8px);
+      background: #ffffff;
       border: 1px solid var(--border-delicate);
       padding: 5px 12px;
       border-radius: 999px;
-      font-size: 9px;
+      font-size: 10.5px;
       font-weight: 600;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -1084,7 +1040,7 @@
     .product-media {
       position: relative;
       height: 350px;
-      background: radial-gradient(circle at 50% 50%, #fbf9f6 0%, #f3eee7 100%);
+      background: var(--bg-sand);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1133,7 +1089,7 @@
       border: 1px solid var(--border-delicate);
       padding: 9px 18px;
       border-radius: 999px;
-      font-size: 9.5px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -1160,18 +1116,10 @@
       flex: 1;
     }
 
-    .product-line {
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold-accent);
-      margin-bottom: 6px;
-    }
 
     .product-name {
       font-family: var(--font-serif);
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 600;
       color: var(--espresso-deep);
       margin-bottom: 6px;
@@ -1179,7 +1127,7 @@
     }
 
     .product-material {
-      font-size: 11.5px;
+      font-size: 14px;
       color: var(--text-body);
       margin-bottom: 18px;
       line-height: 1.5;
@@ -1209,7 +1157,7 @@
     }
 
     .product-installments {
-      font-size: 9.5px;
+      font-size: 12.5px;
       color: var(--text-muted);
       margin-top: 4px;
     }
@@ -1220,7 +1168,7 @@
       background: var(--espresso-deep);
       color: #ffffff;
       font-family: var(--font-sans);
-      font-size: 9.5px;
+      font-size: 11.5px;
       font-weight: 500;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -1259,7 +1207,6 @@
     .collage-card {
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 20px 44px rgba(30, 22, 18, 0.1);
       position: relative;
       aspect-ratio: 3 / 4;
     }
@@ -1290,7 +1237,7 @@
       border-radius: 50%;
       background: #ffffff;
       border: 1px solid var(--border-delicate);
-      box-shadow: 0 14px 34px rgba(30, 22, 18, 0.14);
+      box-shadow: 0 10px 28px rgba(30, 22, 18, 0.12);
       padding: 10px;
       display: grid;
       place-items: center;
@@ -1340,7 +1287,7 @@
     }
 
     .metric-label {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -1350,30 +1297,59 @@
     /* ==================== BANNER EDITORIAL (CAMPO) ==================== */
     .campo-banner {
       position: relative;
-      min-height: min(86vh, 820px);
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
+      overflow: clip;
       isolation: isolate;
       background: #2d2a20;
     }
 
+    /* La foto se queda quieta mientras el contenido sube por encima */
     .campo-media {
-      position: absolute;
-      inset: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100svh;
+      margin-bottom: -100vh;
+      margin-bottom: -100svh;
       z-index: -1;
       overflow: hidden;
     }
 
     .campo-media img {
       width: 100%;
-      height: 116%;
-      margin-top: -8%;
+      height: 100%;
       object-fit: cover;
       object-position: 55% 40%;
       display: block;
-      transform: translate3d(0, var(--parallax, 0px), 0);
-      will-change: transform;
+    }
+
+    .campo-copy {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+
+    .campo-care {
+      padding-top: 0;
+    }
+
+    /* Tarjetas sólidas sobre la foto: se leen bien en cualquier parte de la imagen */
+    .campo-care .care-feature-box {
+      background: var(--bg-sand);
+      border: none;
+    }
+
+    .campo-care .accordion-list {
+      background: #ffffff;
+      border-top: none;
+      border-radius: 22px;
+      padding: 10px 32px;
+    }
+
+    .campo-care .accordion-item:last-child {
+      border-bottom: none;
     }
 
     /* Degradé para que el texto se lea sobre la foto */
@@ -1381,7 +1357,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(20, 16, 10, 0.62) 0%, rgba(20, 16, 10, 0.25) 42%, rgba(20, 16, 10, 0) 65%);
+      background: linear-gradient(90deg, rgba(20, 16, 10, 0.58) 0%, rgba(20, 16, 10, 0.22) 45%, rgba(20, 16, 10, 0.12) 100%);
     }
 
     .campo-copy {
@@ -1396,9 +1372,10 @@
       max-width: 470px;
     }
 
-    .campo-copy .section-kicker {
-      color: var(--gold-light);
+    .campo-copy .section-title {
+      max-width: 640px;
     }
+
 
     .campo-copy .section-title,
     .campo-copy .section-title em {
@@ -1429,11 +1406,6 @@
       transform: none;
     }
 
-    .js .campo-banner[data-reveal] .campo-media {
-      opacity: 0;
-      transform: scale(1.08);
-      transition: opacity 1.4s ease, transform 2.2s var(--ease-couture);
-    }
 
     .js .campo-banner[data-reveal] .campo-copy > * {
       opacity: 0;
@@ -1445,217 +1417,24 @@
     .js .campo-banner[data-reveal] .campo-copy > *:nth-child(3) { transition-delay: 240ms; }
     .js .campo-banner[data-reveal] .campo-copy > *:nth-child(4) { transition-delay: 360ms; }
 
-    .js .campo-banner[data-reveal].is-visible .campo-media,
     .js .campo-banner[data-reveal].is-visible .campo-copy > * {
       opacity: 1;
       transform: none;
     }
 
-    /* En celular: primero la foto, después el texto */
     @media (max-width: 860px) {
-      .campo-banner {
-        display: block;
-        min-height: 0;
-        background: var(--bg-ivory);
-      }
-      .campo-media {
-        position: relative;
-        inset: auto;
-        z-index: 0;
-        aspect-ratio: 4 / 5;
-      }
       .campo-media img {
         object-position: 50% center;
       }
+      /* En celular el degradado va de abajo hacia arriba, detrás del título */
       .campo-media::after {
-        display: none;
+        background: linear-gradient(0deg, rgba(20, 16, 10, 0.72) 0%, rgba(20, 16, 10, 0.25) 45%, rgba(20, 16, 10, 0.08) 100%);
       }
       .campo-copy {
-        color: var(--espresso-deep);
-        padding: 30px 22px 54px;
+        padding: 30px 22px 48px;
       }
-      .campo-copy .section-title {
-        color: var(--espresso-deep);
-      }
-      .campo-copy .section-title em {
-        color: var(--espresso-mid);
-      }
-      .campo-copy .section-kicker {
-        color: var(--gold-accent);
-      }
-      .campo-copy .section-subtitle {
-        color: var(--text-body);
-      }
-      .campo-copy .cta-btn {
-        background: var(--espresso-deep);
-        color: #ffffff;
-        border-color: var(--espresso-deep);
-      }
-    }
-
-    /* ==================== LOOKBOOK ==================== */
-    .lookbook-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 1fr 1fr;
-      grid-auto-rows: minmax(220px, auto);
-      gap: 18px;
-    }
-
-    .lookbook-item {
-      position: relative;
-      margin: 0;
-      border-radius: 18px;
-      overflow: hidden;
-      background: var(--bg-sand);
-      aspect-ratio: 4 / 5;
-    }
-
-    .lookbook-item--tall {
-      grid-row: span 2;
-      aspect-ratio: auto;
-    }
-
-    .lookbook-item--wide {
-      grid-column: span 2;
-      aspect-ratio: 16 / 9;
-    }
-
-    .lookbook-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .lookbook-item figcaption {
-      position: absolute;
-      left: 14px;
-      right: 14px;
-      bottom: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 10px 10px 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      font-family: var(--font-serif);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--espresso-deep);
-    }
-
-    .lookbook-item figcaption span {
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .lookbook-item figcaption button {
-      flex-shrink: 0;
-      appearance: none;
-      border: none;
-      border-radius: 999px;
-      background: var(--espresso-deep);
-      color: #ffffff;
-      font-family: var(--font-sans);
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 9px 14px;
-      cursor: pointer;
-      transition: background-color 0.25s ease, transform 0.2s var(--ease-couture);
-    }
-
-    .lookbook-item figcaption button:active {
-      transform: scale(0.95);
-    }
-
-    /* Entrada: la foto se descubre como un telón con un zoom lento.
-       El recorte va en la imagen (no en la tarjeta) para que el navegador la detecte al bajar */
-    .js .lookbook-item[data-reveal] {
-      opacity: 1;
-      transform: none;
-      background: transparent;
-      transition: none;
-    }
-
-    .js .lookbook-item[data-reveal] img {
-      clip-path: inset(100% 0 0 0);
-      transform: scale(1.18);
-      transition:
-        clip-path 1.2s var(--ease-couture) var(--d, 0ms),
-        transform 1.8s var(--ease-couture) var(--d, 0ms);
-    }
-
-    .js .lookbook-item[data-reveal] figcaption {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.7s ease calc(var(--d, 0ms) + 600ms), transform 0.8s var(--ease-couture) calc(var(--d, 0ms) + 600ms);
-    }
-
-    .js .lookbook-item[data-reveal].is-visible img {
-      clip-path: inset(0 0 0 0);
-      transform: scale(1);
-    }
-
-    .js .lookbook-item[data-reveal].is-visible figcaption {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* Después de entrar, la foto "respira" muy despacio */
-    .lookbook-item:not([data-reveal]) img {
-      animation: lookBreath 14s ease-in-out infinite alternate;
-    }
-
-    @keyframes lookBreath {
-      from { transform: scale(1); }
-      to { transform: scale(1.05) translateY(-1%); }
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .lookbook-item:hover img {
-        animation-play-state: paused;
-      }
-      .lookbook-item figcaption button:hover {
-        background: var(--espresso-mid);
-      }
-    }
-
-    @media (max-width: 860px) {
-      .lookbook-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-      .lookbook-item--tall {
-        grid-column: span 2;
-        grid-row: auto;
-        aspect-ratio: 4 / 5;
-      }
-      .lookbook-item--wide {
-        grid-column: span 2;
-        aspect-ratio: 4 / 3;
-      }
-      .lookbook-item--wide img {
-        object-position: 78% center;
-      }
-      .lookbook-item figcaption {
-        left: 8px;
-        right: 8px;
-        bottom: 8px;
-        font-size: 14px;
-      }
-      .lookbook-item:not(.lookbook-item--tall):not(.lookbook-item--wide) figcaption span {
-        display: none;
-      }
-      .lookbook-item:not(.lookbook-item--tall):not(.lookbook-item--wide) figcaption {
-        justify-content: center;
-        padding: 6px;
+      .campo-care .accordion-list {
+        padding: 4px 18px;
       }
     }
 
@@ -1739,7 +1518,7 @@
       grid-template-rows: 0fr;
       opacity: 0;
       transition: grid-template-rows 0.5s var(--ease-couture), opacity 0.35s ease;
-      font-size: 13px;
+      font-size: 15.5px;
       line-height: 1.75;
       color: var(--text-body);
     }
@@ -1782,11 +1561,6 @@
       gap: 20px;
     }
 
-    .stars {
-      color: var(--gold-accent);
-      letter-spacing: 3px;
-      font-size: 12px;
-    }
 
     .testimonial-quote {
       font-family: var(--font-serif);
@@ -1802,7 +1576,7 @@
       justify-content: space-between;
       padding-top: 14px;
       border-top: 1px solid var(--border-delicate);
-      font-size: 11px;
+      font-size: 13px;
     }
 
     .author-name {
@@ -1825,7 +1599,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 48px;
-      box-shadow: 0 24px 60px rgba(30, 22, 18, 0.05);
     }
 
     .concierge-info-list {
@@ -1842,11 +1615,11 @@
     }
 
     .info-kicker {
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold-accent);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      color: var(--text-muted);
     }
 
     .info-val {
@@ -1873,7 +1646,7 @@
       border: 1px solid var(--border-delicate);
       border-radius: 12px;
       font-family: var(--font-sans);
-      font-size: 12.5px;
+      font-size: 16px;
       color: var(--espresso-deep);
       background: var(--bg-ivory);
       outline: none;
@@ -1917,14 +1690,14 @@
     }
 
     .footer-desc {
-      font-size: 12px;
+      font-size: 14.5px;
       line-height: 1.75;
       color: rgba(244, 239, 232, 0.72);
       max-width: 310px;
     }
 
     .footer-col-title {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -1942,7 +1715,7 @@
     .footer-links a {
       color: rgba(244, 239, 232, 0.78);
       text-decoration: none;
-      font-size: 12px;
+      font-size: 14.5px;
       transition: color 0.2s ease;
     }
 
@@ -1964,7 +1737,7 @@
       background: rgba(255, 255, 255, 0.06);
       color: #ffffff;
       font-family: var(--font-sans);
-      font-size: 11.5px;
+      font-size: 16px;
       outline: none;
     }
 
@@ -1972,10 +1745,10 @@
       padding: 11px 20px;
       border-radius: 999px;
       border: none;
-      background: var(--gold-accent);
-      color: #ffffff;
+      background: #b08a5a;
+      color: #1e1612;
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -1990,8 +1763,8 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 12px;
-      font-size: 11px;
-      color: rgba(244, 239, 232, 0.55);
+      font-size: 13px;
+      color: rgba(244, 239, 232, 0.7);
     }
 
     /* ==================== SLIDE-OVER SHOPPING BAG DRAWER ==================== */
@@ -2063,7 +1836,7 @@
     .drawer-shipping-banner {
       background: var(--bg-ivory);
       padding: 10px 28px;
-      font-size: 10.5px;
+      font-size: 13px;
       color: var(--espresso-mid);
       border-bottom: 1px solid var(--border-delicate);
       display: flex;
@@ -2073,7 +1846,7 @@
 
     .drawer-count {
       display: block;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -2124,11 +1897,11 @@
 
     .order-field > span,
     .order-field > legend {
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      color: var(--text-body);
       padding: 0;
       margin-bottom: 6px;
     }
@@ -2189,13 +1962,13 @@
     .pay-option span {
       display: flex;
       flex-direction: column;
-      font-size: 12.5px;
+      font-size: 14px;
       color: var(--espresso-deep);
       line-height: 1.3;
     }
 
     .pay-option small {
-      font-size: 10.5px;
+      font-size: 12.5px;
       color: var(--text-muted);
       margin-top: 2px;
     }
@@ -2217,7 +1990,7 @@
       background: none;
       padding: 4px 0;
       font-family: var(--font-sans);
-      font-size: 10.5px;
+      font-size: 12.5px;
       color: var(--text-muted);
       text-decoration: underline;
       text-underline-offset: 3px;
@@ -2241,7 +2014,7 @@
       align-items: baseline;
       justify-content: space-between;
       gap: 12px;
-      font-size: 12px;
+      font-size: 14px;
       color: var(--text-body);
     }
 
@@ -2255,7 +2028,7 @@
     }
 
     .checkout-note {
-      font-size: 10.5px;
+      font-size: 12.5px;
       line-height: 1.5;
       color: var(--text-muted);
       text-align: center;
@@ -2271,6 +2044,9 @@
     }
 
     @media (max-width: 480px) {
+      .brand-subtitle {
+        display: none;
+      }
       .cart-drawer {
         width: 100vw;
       }
@@ -2302,6 +2078,9 @@
         height: 32px;
         font-size: 15px;
       }
+      width: 32px;
+      height: 30px;
+      font-size: 14px;
     }
 
     .drawer-empty {
@@ -2338,7 +2117,7 @@
     }
 
     .cart-item-meta {
-      font-size: 10.5px;
+      font-size: 12.5px;
       color: var(--text-muted);
       margin: 2px 0 8px;
     }
@@ -2362,7 +2141,7 @@
     }
 
     .qty-val {
-      font-size: 11px;
+      font-size: 13px;
       padding: 0 8px;
       font-weight: 600;
     }
@@ -2388,7 +2167,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 11.5px;
+      font-size: 13.5px;
       color: var(--text-body);
       cursor: pointer;
     }
@@ -2403,7 +2182,7 @@
     }
 
     .drawer-total-label {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -2425,7 +2204,7 @@
       background: var(--espresso-deep);
       color: #ffffff;
       font-family: var(--font-sans);
-      font-size: 10.5px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -2435,7 +2214,6 @@
       justify-content: center;
       gap: 10px;
       margin-top: 4px;
-      box-shadow: 0 10px 26px rgba(30, 22, 18, 0.16);
       transition: background 0.25s ease, transform 0.2s var(--ease-couture);
     }
 
@@ -2465,6 +2243,11 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.35s ease;
+    }
+
+    .modal-backdrop:not(.open) {
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0s linear 0.35s;
     }
 
     .modal-backdrop.open {
@@ -2501,7 +2284,7 @@
     }
 
     .modal-gallery {
-      background: radial-gradient(circle at 50% 50%, #fbf9f6 0%, #f1ebe2 100%);
+      background: var(--bg-sand);
       padding: 36px;
       display: flex;
       flex-direction: column;
@@ -2530,7 +2313,7 @@
       border-radius: 999px;
       border: 1px solid var(--border-delicate);
       background: #ffffff;
-      font-size: 10px;
+      font-size: 11.5px;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -2559,7 +2342,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      font-size: 12px;
+      font-size: 14.5px;
       color: var(--text-body);
     }
 
@@ -2570,6 +2353,17 @@
       flex-wrap: wrap;
       gap: 10px;
       margin: -8px 0 20px;
+    }
+
+    .modal-line {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .care-title {
+      font-size: clamp(26px, 3vw, 38px);
+      margin-bottom: 14px;
     }
 
     .specs-list strong {
@@ -2587,7 +2381,7 @@
       color: #ffffff;
       padding: 13px 24px;
       border-radius: 999px;
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.08em;
       box-shadow: 0 12px 32px rgba(30, 22, 18, 0.22);
@@ -2756,7 +2550,7 @@
       outline-offset: 3px;
     }
 
-    section[id], main[id] {
+    section[id], main[id], #cuidados {
       scroll-margin-top: 84px;
     }
 
@@ -2779,7 +2573,6 @@
         background: var(--espresso-deep);
         border-color: var(--espresso-deep);
         transform: none;
-        box-shadow: 0 10px 26px rgba(30, 22, 18, 0.14);
       }
       .cta-btn-secondary:hover {
         border-color: var(--border-strong);
@@ -2849,7 +2642,7 @@
     /* Responsive adjustments */
     @media (max-width: 1280px) {
       .hero-main {
-        grid-template-columns: minmax(260px, 330px) 1fr minmax(200px, 240px);
+        grid-template-columns: minmax(280px, 420px) 1fr minmax(200px, 240px);
       }
       .stage-layer {
         --bag-w: clamp(280px, 27vw, 400px);
@@ -2892,10 +2685,7 @@
         padding: 0 12px;
         overflow: hidden;
       }
-      .announcement-sep {
-        display: none;
-      }
-      .announcement-bar > span:not(.announcement-sep) {
+      .announcement-bar > span {
         position: absolute;
         left: 12px;
         right: 12px;
@@ -2904,13 +2694,13 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 9px;
-        letter-spacing: 0.16em;
+        font-size: 12px;
+        letter-spacing: 0.02em;
         opacity: 0;
         animation: annRotate 12s infinite;
       }
-      .announcement-bar > span:nth-child(3) { animation-delay: 4s; }
-      .announcement-bar > span:nth-child(5) { animation-delay: 8s; }
+      .announcement-bar > span:nth-child(2) { animation-delay: 4s; }
+      .announcement-bar > span:nth-child(3) { animation-delay: 8s; }
     }
 
     @media (max-width: 1000px) {
@@ -2985,7 +2775,7 @@
         grid-column: 1 / -1;
         justify-self: center;
         text-align: center;
-        font-size: 9px;
+        font-size: 10.5px;
       }
       .atelier-story-grid,
       .care-grid,
@@ -3013,6 +2803,19 @@
       .swatch-list {
         gap: 10px;
       }
+      .brand-seal {
+        width: 44px;
+        height: 44px;
+      }
+      .brand-title {
+        font-size: 17px;
+        letter-spacing: 0.12em;
+        white-space: nowrap;
+      }
+      .brand-subtitle {
+        font-size: 9.5px;
+        letter-spacing: 0.16em;
+      }
       .navbar.is-condensed .nav-pill-shell {
         display: none;
       }
@@ -3029,16 +2832,12 @@
   <!-- Top Luxury Announcement Bar -->
   <div class="announcement-bar">
     <span>Envíos asegurados a Argentina y al mundo</span>
-    <span class="announcement-sep">✦</span>
     <span>Cuero legítimo, hecho a mano en Salta</span>
-    <span class="announcement-sep">✦</span>
     <span>3 y 6 cuotas sin interés en Argentina</span>
   </div>
 
   <!-- ==================== HERO 3D DIAGONAL SHOWCASE ==================== -->
   <main class="atelier-viewport" id="top" aria-label="Legado de Salta — Presentación principal">
-    <div class="ambient-bg" id="ambientBg"></div>
-    <img src="assets/logo-transparent.png" alt="" class="seal-watermark" aria-hidden="true" />
 
     <!-- Top Couture Navigation Bar -->
     <div class="navbar-spacer" id="navbarSpacer" aria-hidden="true"></div>
@@ -3104,8 +2903,6 @@
           <span class="slide-counter" id="slideCounter" aria-live="polite">01 / 10</span>
           <span class="autoplay-progress" id="autoplayProgress" aria-hidden="true"><span></span></span>
         </div>
-
-        <span class="collection-eyebrow" id="collectionEyebrow">Línea Tradición Salteña</span>
 
         <h1 class="hero-title" id="heroTitle">
           Elegancia noble,<br />
@@ -3242,7 +3039,6 @@
   <!-- ==================== LA BOUTIQUE — FULL CATALOG ==================== -->
   <section class="section-container" id="coleccion">
     <div class="section-header">
-      <span class="section-kicker">Colección Permanente &amp; Cápsulas</span>
       <h2 class="section-title">La Boutique <em>Legado de Salta</em></h2>
       <p class="section-subtitle">
         Cada pieza nace en nuestro taller de Salta y viaja a cualquier rincón del mundo. Abrí su ficha técnica para ver la textura real del cuero bajo luz cálida de taller, sus medidas y sus terminaciones.
@@ -3270,22 +3066,6 @@
     <div class="catalog-grid" id="catalogGrid"></div>
   </section>
 
-  <!-- ==================== BANNER EDITORIAL — DE LOS CERROS AL MUNDO ==================== -->
-  <section class="campo-banner" id="campo" aria-label="La Marinera Suela Patinada en el campo">
-    <div class="campo-media">
-      <img src="assets/editorial-campo.jpg" alt="Mujer caminando por un campo con la Marinera Suela Patinada llevada como mochila" loading="lazy" decoding="async" />
-    </div>
-    <div class="campo-copy">
-      <span class="section-kicker">Marinera Suela Patinada</span>
-      <h2 class="section-title">Nacida entre cerros,<br /><em>hecha para recorrer el mundo</em></h2>
-      <p class="section-subtitle">Se lleva al hombro, cruzada o como mochila. Cuero vacuno que acompaña cada camino y mejora con los años.</p>
-      <button class="cta-btn" type="button" data-campo-product="suela-marinera">
-        <span>Ver la pieza</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </button>
-    </div>
-  </section>
-
   <!-- ==================== EL ATELIER & SAVOIR-FAIRE ==================== -->
   <section class="atelier-story-section" id="atelier">
     <div class="section-container">
@@ -3303,7 +3083,6 @@
         </div>
 
         <div class="atelier-copy">
-          <span class="section-kicker">Nuestra Herencia · De Salta para el mundo</span>
           <h2 class="section-title">El arte del cuero,<br /><em>elevado a joya cotidiana</em></h2>
           <blockquote class="atelier-quote">
             “En Salta, el cuero no es simplemente un material: es memoria, paisaje y oficio transmitido de generación en generación.”
@@ -3334,86 +3113,70 @@
     </div>
   </section>
 
-  <!-- ==================== LOOKBOOK — ASÍ SE LLEVA ====================
-       Fotos: assets/lookbook-1.jpg … lookbook-4.jpg (verticales 4:5; la 4 horizontal).
-       La sección aparece sola cuando hay al menos una. -->
-  <section class="section-container lookbook-section" id="lookbook" hidden>
-    <div class="section-header">
-      <span class="section-kicker">Lookbook · De Salta al mundo</span>
-      <h2 class="section-title">Así se <em>lleva el Legado</em></h2>
-      <p class="section-subtitle">Piezas pensadas para acompañarte todos los días: del café de la mañana a una cena en cualquier ciudad del mundo.</p>
+  <!-- ==================== DE LOS CERROS AL MUNDO + CUIDADO DEL CUERO ====================
+       La foto queda fija de fondo; el título y luego la sección de cuidados pasan por encima. -->
+  <section class="campo-banner" id="campo" aria-label="La Marinera Suela Patinada y el cuidado del cuero">
+    <div class="campo-media">
+      <img src="assets/editorial-campo.jpg" alt="Mujer caminando por un campo con la Marinera Suela Patinada llevada como mochila" loading="lazy" decoding="async" />
     </div>
-    <div class="lookbook-grid">
-      <figure class="lookbook-item lookbook-item--tall" data-product="suela-marinera">
-        <img src="assets/lookbook-1.jpg" alt="Marinera Suela Patinada sobre el pasto de los cerros" decoding="async" />
-        <figcaption><span>Marinera Suela Patinada</span><button type="button" data-look>Ver pieza</button></figcaption>
-      </figure>
-      <figure class="lookbook-item" data-product="tote-trenzada-oro">
-        <img src="assets/lookbook-2.jpg" alt="Ilustración de mujer llevando la Tote Trenzada Chocolate y Oro" decoding="async" />
-        <figcaption><span>Tote Trenzada Chocolate &amp; Oro</span><button type="button" data-look>Ver pieza</button></figcaption>
-      </figure>
-      <figure class="lookbook-item" data-product="bandolera-eslabones-oro">
-        <img src="assets/lookbook-3.jpg" alt="Ilustración de mujer con la Mini Bandolera Eslabones y Cadena Oro cruzada" decoding="async" />
-        <figcaption><span>Mini Bandolera Eslabones &amp; Cadena Oro</span><button type="button" data-look>Ver pieza</button></figcaption>
-      </figure>
-      <figure class="lookbook-item lookbook-item--wide" data-product="mini-marinera-croco">
-        <img src="assets/lookbook-4.jpg" alt="Ilustración de mujer con la Mini Marinera Croco Nocturno en una salida de noche" decoding="async" />
-        <figcaption><span>Mini Marinera Croco Nocturno</span><button type="button" data-look>Ver pieza</button></figcaption>
-      </figure>
+    <div class="campo-copy">
+      <h2 class="section-title">Nacida entre cerros,<br /><em>hecha para el mundo</em></h2>
+      <p class="section-subtitle">La Marinera Suela Patinada se lleva al hombro, cruzada o como mochila. Cuero vacuno que acompaña cada camino y mejora con los años.</p>
+      <button class="cta-btn" type="button" data-campo-product="suela-marinera">
+        <span>Ver la pieza</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
-  </section>
-
-  <!-- ==================== LEATHER CARE & CRAFTSMANSHIP GUIDE ==================== -->
-  <section class="section-container" id="cuidados">
-    <div class="care-grid">
-      <div class="care-feature-box">
-        <img src="assets/logo-flower.png" alt="" class="flower-accent" />
-        <span class="section-kicker">Manual de Conservación</span>
-        <h2 class="section-title" style="font-size: 36px; margin-bottom: 14px;">La nobleza de un cuero que <em>mejora con los años</em></h2>
-        <p class="section-subtitle" style="margin-bottom: 24px;">
-          Todas nuestras piezas se entregan con su bolsa guardapolvo en lienzo de algodón natural, tarjeta de autenticidad firmada por el artesano y bálsamo nutritivo de cera de abejas en compras de colección.
-        </p>
-        <a href="#contacto" class="cta-btn" style="text-decoration: none;">Consultar con un especialista</a>
-      </div>
-
-      <div class="accordion-list" id="accordionList">
-        <div class="accordion-item open">
-          <button class="accordion-trigger" type="button">
-            <span>1. ¿Cómo cuidar e hidratar el cuero vacuno legítimo?</span>
-            <span class="accordion-icon">+</span>
-          </button>
-          <div class="accordion-content">
-            Recomendamos limpiar la superficie con un paño seco de microfibra o algodón suave. Cada 4 a 6 meses, aplicá una capa muy fina de crema nutritiva incolora para cuero o cera natural, frotando con movimientos circulares suaves. Evitá la exposición prolongada al sol directo o fuentes de calor intenso.
-          </div>
+    <div class="campo-care section-container" id="cuidados">
+      <div class="care-grid">
+        <div class="care-feature-box">
+          <img src="assets/logo-flower.png" alt="" class="flower-accent" />
+          <h2 class="section-title care-title">La nobleza de un cuero que <em>mejora con los años</em></h2>
+          <p class="section-subtitle" style="margin-bottom: 24px;">
+            Todas nuestras piezas se entregan con su bolsa guardapolvo en lienzo de algodón natural, tarjeta de autenticidad firmada por el artesano y bálsamo nutritivo de cera de abejas en compras de colección.
+          </p>
+          <a href="#contacto" class="cta-btn" style="text-decoration: none;">Consultar con un especialista</a>
         </div>
 
-        <div class="accordion-item">
-          <button class="accordion-trigger" type="button">
-            <span>2. ¿Qué capacidad e interior tienen las carteras?</span>
-            <span class="accordion-icon">+</span>
-          </button>
-          <div class="accordion-content">
-            Nuestras Marineras (29 × 26 × 15 cm), la Tote Estructurada (32 × 34 × 13 cm) y nuestras Bandoleras y Morrales de Solapa cuentan con compartimentos pensados para el uso diario, bolsillo interno para valores, herrajes reforzados y estructura firme.
+        <div class="accordion-list" id="accordionList">
+          <div class="accordion-item open">
+            <button class="accordion-trigger" type="button">
+              <span>1. ¿Cómo cuidar e hidratar el cuero vacuno legítimo?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content">
+              Recomendamos limpiar la superficie con un paño seco de microfibra o algodón suave. Cada 4 a 6 meses, aplicá una capa muy fina de crema nutritiva incolora para cuero o cera natural, frotando con movimientos circulares suaves. Evitá la exposición prolongada al sol directo o fuentes de calor intenso.
+            </div>
           </div>
-        </div>
 
-        <div class="accordion-item">
-          <button class="accordion-trigger" type="button">
-            <span>3. Eslabones de cuero calado y correas intercambiables</span>
-            <span class="accordion-icon">+</span>
-          </button>
-          <div class="accordion-content">
-            Un sello distintivo de nuestro Atelier son las guardas y correas de <strong>eslabones de cuero vacuno calados y encastrados a mano</strong>, combinados con cadenas doradas o niqueladas, además de nuestras correas Clásica y Galón tejido.
+          <div class="accordion-item">
+            <button class="accordion-trigger" type="button">
+              <span>2. ¿Qué capacidad e interior tienen las carteras?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content">
+              Nuestras Marineras (29 × 26 × 15 cm), la Tote Estructurada (32 × 34 × 13 cm) y nuestras Bandoleras y Morrales de Solapa cuentan con compartimentos pensados para el uso diario, bolsillo interno para valores, herrajes reforzados y estructura firme.
+            </div>
           </div>
-        </div>
 
-        <div class="accordion-item">
-          <button class="accordion-trigger" type="button">
-            <span>4. Envíos a Argentina y al mundo, pagos y cambios</span>
-            <span class="accordion-icon">+</span>
-          </button>
-          <div class="accordion-content">
-            <strong>En Argentina</strong> el envío es sin cargo, por correo prioritario asegurado (24 hs en Salta y el NOA, 3 a 5 días hábiles al resto del país), con 3 y 6 cuotas sin interés con todas las tarjetas bancarias y 15% de descuento por transferencia. <strong>Al resto del mundo</strong> enviamos por courier internacional asegurado y con seguimiento: te cotizamos el costo y el plazo según tu destino, y coordinamos el pago por WhatsApp. En todos los casos tenés 30 días corridos para cambios.
+          <div class="accordion-item">
+            <button class="accordion-trigger" type="button">
+              <span>3. Eslabones de cuero calado y correas intercambiables</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content">
+              Un sello distintivo de nuestro Atelier son las guardas y correas de <strong>eslabones de cuero vacuno calados y encastrados a mano</strong>, combinados con cadenas doradas o niqueladas, además de nuestras correas Clásica y Galón tejido.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-trigger" type="button">
+              <span>4. Envíos a Argentina y al mundo, pagos y cambios</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content">
+              <strong>En Argentina</strong> el envío es sin cargo, por correo prioritario asegurado (24 hs en Salta y el NOA, 3 a 5 días hábiles al resto del país), con 3 y 6 cuotas sin interés con todas las tarjetas bancarias y 15% de descuento por transferencia. <strong>Al resto del mundo</strong> enviamos por courier internacional asegurado y con seguimiento: te cotizamos el costo y el plazo según tu destino, y coordinamos el pago por WhatsApp. En todos los casos tenés 30 días corridos para cambios.
+            </div>
           </div>
         </div>
       </div>
@@ -3424,15 +3187,13 @@
   <section class="testimonials-section">
     <div class="section-container">
       <div class="section-header">
-        <span class="section-kicker">Voces de Nuestras Clientas</span>
         <h2 class="section-title">Quienes ya portan <em>el Legado</em></h2>
       </div>
 
       <div class="testimonials-grid">
         <article class="testimonial-card">
           <div>
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-quote" style="margin-top: 14px;">
+            <p class="testimonial-quote">
               “Recibí la Tote Trenzada Chocolate &amp; Oro en Buenos Aires. El aroma a cuero real al abrir la caja y la prolijidad del trenzado dorado superaron por completo mis expectativas. Parece una pieza de boutique europea.”
             </p>
           </div>
@@ -3444,8 +3205,7 @@
 
         <article class="testimonial-card">
           <div>
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-quote" style="margin-top: 14px;">
+            <p class="testimonial-quote">
               “La Marinera Suela Patinada y la Bandolera con eslabones y cadena dorada son mis favoritas. El cuero es súper noble y los detalles hechos a mano llaman la atención en todos lados.”
             </p>
           </div>
@@ -3457,8 +3217,7 @@
 
         <article class="testimonial-card">
           <div>
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-quote" style="margin-top: 14px;">
+            <p class="testimonial-quote">
               “Compré el Morral Bicolor Tierra &amp; Visón para regalarle a mi madre y terminé encargando la Mini Marinera Croco Nocturno para mí. Los herrajes y las costuras tienen una calidad única.”
             </p>
           </div>
@@ -3475,7 +3234,6 @@
   <section class="section-container" id="contacto">
     <div class="concierge-card">
       <div>
-        <span class="section-kicker">Atención Personalizada &amp; Showroom</span>
         <h2 class="section-title" style="font-size: 38px;">Concierge <em>Legado de Salta</em></h2>
         <p class="section-subtitle">
           Estés en Salta o en cualquier parte del mundo: ¿querés ver un video en detalle de alguna cartera bajo luz natural, personalizar el grabado de iniciales, cotizar un envío internacional o agendar una visita privada en nuestro Showroom de Salta?
@@ -3580,10 +3338,9 @@
         <h3 class="drawer-title">Tu Bolsa</h3>
         <span class="drawer-count" id="drawerCount">0 piezas</span>
       </div>
-      <button class="drawer-close" id="drawerClose" type="button" aria-label="Cerrar bolsa">✕</button>
+      <button class="drawer-close" id="drawerClose" type="button" aria-label="Cerrar bolsa"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></button>
     </div>
     <div class="drawer-shipping-banner">
-      <span aria-hidden="true">✦</span>
       <span><strong>Envío sin cargo en Argentina</strong> · al exterior lo cotizamos según tu destino.</span>
     </div>
 
@@ -3658,7 +3415,7 @@
   <!-- ==================== QUICKVIEW PRODUCT DETAIL MODAL ==================== -->
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
     <div class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar ficha">✕</button>
+      <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar ficha"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></button>
       <div class="modal-gallery">
         <img src="assets/cartera-1.png" alt="" class="modal-main-img" id="modalMainImg" decoding="async" />
         <div class="modal-view-switch">
@@ -3667,8 +3424,8 @@
         </div>
       </div>
       <div class="modal-details">
-        <span class="section-kicker" id="modalEyebrow">Línea Tradición Salteña</span>
-        <h3 class="section-title" id="modalTitle" style="font-size: 32px; margin-bottom: 6px;">Marinera Suela Patinada</h3>
+        <h3 class="section-title" id="modalTitle" style="font-size: 32px; margin-bottom: 4px;">Marinera Suela Patinada</h3>
+        <p class="modal-line" id="modalEyebrow">Línea Tradición Salteña</p>
         <div class="product-price" id="modalPrice" style="font-size: 28px; margin-bottom: 12px;">$185.000</div>
         <p class="section-subtitle" id="modalDesc" style="font-size: 12.5px;"></p>
 
@@ -3717,7 +3474,6 @@
         image: 'assets/cartera-1.png',
         editorialImage: 'assets/editorial-1.jpg',
         swatchColor: 'linear-gradient(135deg, #b87b38 0%, #69361c 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(247, 239, 228, 0.78) 0%, rgba(252, 250, 247, 0.35) 48%, #ffffff 78%)',
         dimensions: '29 cm (alto) × 26 cm (ancho) × 15 cm (base)',
         hardware: 'Níquel pulido & ojalillos reforzados',
         interior: 'Forrería gross de algodón, bolsillo con cierre y portallaves'
@@ -3738,7 +3494,6 @@
         image: 'assets/cartera-2.png',
         editorialImage: 'assets/editorial-2.jpg',
         swatchColor: 'linear-gradient(135deg, #543829 0%, #b8964c 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(244, 238, 230, 0.78) 0%, rgba(252, 250, 248, 0.35) 48%, #ffffff 78%)',
         dimensions: '32 cm (alto) × 34 cm (ancho) × 13 cm (fuelle)',
         hardware: 'Remaches en bronce viejo & vivo en cuero oro',
         interior: 'Doble compartimento interno, bolsillo con cierre y base estructurada'
@@ -3759,7 +3514,6 @@
         image: 'assets/cartera-3.png',
         editorialImage: 'assets/editorial-3.jpg',
         swatchColor: 'linear-gradient(135deg, #242426 0%, #0d0d0e 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(238, 240, 244, 0.72) 0%, rgba(249, 250, 251, 0.32) 48%, #ffffff 78%)',
         dimensions: '29 cm (alto) × 26 cm (ancho) × 15 cm (base)',
         hardware: 'Tachas piramidales en níquel & dije esférico labrado',
         interior: 'Interior impermeable negro con bolsillo organizador y mosquetón'
@@ -3780,7 +3534,6 @@
         image: 'assets/cartera-4.png',
         editorialImage: 'assets/editorial-4.jpg',
         swatchColor: 'linear-gradient(135deg, #2f4742 0%, #17211f 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(232, 242, 239, 0.75) 0%, rgba(247, 251, 250, 0.35) 48%, #ffffff 78%)',
         dimensions: '29 cm (alto) × 26 cm (ancho) × 15 cm (base)',
         hardware: 'Bronce viejo cepillado & borla desmontable con cuentas',
         interior: 'Forrería gross natural, bolsillo con cierre metálico y portallaves'
@@ -3801,7 +3554,6 @@
         image: 'assets/cartera-5.png',
         editorialImage: 'assets/editorial-5.jpg',
         swatchColor: 'linear-gradient(135deg, #263832 0%, #d4af37 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(236, 243, 238, 0.76) 0%, rgba(250, 248, 242, 0.35) 48%, #ffffff 78%)',
         dimensions: '21 cm (alto) × 15 cm (ancho) × 6 cm (fuelle)',
         hardware: 'Cadena maciza dorada & placa Hand Made en bronce',
         interior: 'Formato ideal para celular, documentos, tarjetas y llaves'
@@ -3822,7 +3574,6 @@
         image: 'assets/cartera-6.png',
         editorialImage: 'assets/editorial-6.jpg',
         swatchColor: 'linear-gradient(135deg, #32423d 0%, #9ca3af 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(235, 241, 239, 0.75) 0%, rgba(248, 250, 249, 0.35) 48%, #ffffff 78%)',
         dimensions: '18 cm (alto) × 25 cm (ancho) × 8 cm (fuelle)',
         hardware: 'Cierre broche niquelado & punteras metálicas labradas',
         interior: 'Doble correa: trenzada artesanal en cuero + cinta ancha regulable'
@@ -3843,7 +3594,6 @@
         image: 'assets/cartera-7.png',
         editorialImage: 'assets/editorial-7.jpg',
         swatchColor: 'linear-gradient(135deg, #1d2230 0%, #633b26 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(236, 238, 245, 0.76) 0%, rgba(248, 245, 241, 0.35) 48%, #ffffff 78%)',
         dimensions: '22 cm (alto) × 20 cm (ancho) × 9 cm (fuelle)',
         hardware: 'Broche torniquete dorado & cadena combinada con cuero',
         interior: 'Interior forrado con bolsillo tarjetero en cuero'
@@ -3864,7 +3614,6 @@
         image: 'assets/cartera-8.png',
         editorialImage: 'assets/editorial-8.jpg',
         swatchColor: 'linear-gradient(135deg, #151421 0%, #a1a1aa 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(235, 236, 244, 0.76) 0%, rgba(248, 249, 252, 0.35) 48%, #ffffff 78%)',
         dimensions: '22 cm (alto) × 19 cm (ancho) × 11 cm (base)',
         hardware: 'Ojalillos y cadena serpiente en baño de níquel brillante',
         interior: 'Forrería satinada oscura y cierre ajustador en cuero'
@@ -3885,7 +3634,6 @@
         image: 'assets/cartera-9.png',
         editorialImage: 'assets/editorial-9.jpg',
         swatchColor: 'linear-gradient(135deg, #3c4266 0%, #191d30 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(234, 236, 248, 0.76) 0%, rgba(247, 248, 253, 0.35) 48%, #ffffff 78%)',
         dimensions: '23 cm (alto) × 20 cm (ancho) × 8 cm (fuelle)',
         hardware: 'Broche de presión cromado & mosquetones giratorios',
         interior: 'Fuelle lateral expansible y compartimento principal amplio'
@@ -3906,7 +3654,6 @@
         image: 'assets/cartera-10.png',
         editorialImage: 'assets/editorial-10.jpg',
         swatchColor: 'linear-gradient(135deg, #4b382a 0%, #b59b7d 100%)',
-        bgAura: 'radial-gradient(circle at 50% 48%, rgba(244, 238, 229, 0.78) 0%, rgba(251, 249, 245, 0.35) 48%, #ffffff 78%)',
         dimensions: '26 cm (alto) × 24 cm (ancho) × 10 cm (fuelle)',
         hardware: 'Torniquete dorado, remaches en bronce y mosquetón con borla',
         interior: 'Bolsillo frontal exterior + amplio interior forrado con cierre'
@@ -3924,7 +3671,6 @@
     const $ = (id) => document.getElementById(id);
 
     // DOM Elements
-    const ambientBg = $('ambientBg');
     const stageLayer = $('stageLayer');
     const swatchList = $('swatchList');
     const prevBtn = $('prevBtn');
@@ -3939,7 +3685,6 @@
     const heroViewport = $('top');
 
     const slideCounter = $('slideCounter');
-    const collectionEyebrow = $('collectionEyebrow');
     const heroTitle = $('heroTitle');
     const heroDesc = $('heroDesc');
     const bagModelName = $('bagModelName');
@@ -3957,17 +3702,10 @@
     const formatARS = (num) => '$' + Math.round(num).toLocaleString('es-AR');
 
     // ==================== BUILD HERO 3D DIAGONAL CAROUSEL ====================
-    const bgLayers = [];
     const bagEls = [];
     const swatchBtns = [];
 
     HERO_BAGS.forEach((bag, idx) => {
-      const bg = document.createElement('div');
-      bg.className = 'ambient-layer' + (idx === 0 ? ' active' : '');
-      bg.style.background = bag.bgAura;
-      ambientBg.appendChild(bg);
-      bgLayers.push(bg);
-
       const item = document.createElement('div');
       item.className = 'bag-item';
       item.dataset.index = idx;
@@ -4052,10 +3790,9 @@
       priceRaf = requestAnimationFrame(step);
     }
 
-    const swapTargets = [collectionEyebrow, heroTitle, heroDesc, bagModelName, bagMaterialTag, priceOld];
+    const swapTargets = [heroTitle, heroDesc, bagModelName, bagMaterialTag, priceOld];
 
     function writeCopy(bag) {
-      collectionEyebrow.textContent = bag.eyebrow;
       heroTitle.innerHTML = bag.titleHtml;
       heroDesc.textContent = bag.desc;
       bagModelName.textContent = bag.modelName;
@@ -4106,10 +3843,6 @@
       const total = HERO_BAGS.length;
       const prevIdx = (activeIndex - 1 + total) % total;
       const nextIdx = (activeIndex + 1) % total;
-
-      bgLayers.forEach((layer, idx) => {
-        layer.classList.toggle('active', idx === activeIndex);
-      });
 
       bagEls.forEach((item, idx) => {
         let slot;
@@ -4356,7 +4089,6 @@
             <button class="quickview-pill" type="button" data-quickview>Ver Ficha de Atelier</button>
           </div>
           <div class="product-body">
-            <span class="product-line">${prod.eyebrow}</span>
             <h3 class="product-name" data-quickview>${prod.modelName}</h3>
             <p class="product-material">${prod.materialTag}</p>
             <div class="product-footer">
@@ -4890,65 +4622,13 @@
       });
     });
 
-    // ==================== LOOKBOOK ====================
-    // Muestra solo las fotos que existen; si no hay ninguna, la sección queda oculta
-    const lookbook = $('lookbook');
-    let lookLoaded = 0;
-    lookbook.querySelectorAll('.lookbook-item').forEach((fig) => {
-      const img = fig.querySelector('img');
-      const done = (ok) => {
-        if (!ok) {
-          fig.remove();
-          return;
-        }
-        lookLoaded += 1;
-        if (lookLoaded === 1) lookbook.hidden = false;
-      };
-      if (img.complete) done(img.naturalWidth > 0);
-      else {
-        img.addEventListener('load', () => done(true), { once: true });
-        img.addEventListener('error', () => done(false), { once: true });
-      }
-    });
-
-    lookbook.addEventListener('click', (e) => {
-      if (!e.target.closest('[data-look]')) return;
-      const prod = PRODUCTS.find((p) => p.id === e.target.closest('.lookbook-item').dataset.product);
-      if (prod) openProductModal(prod);
-    });
-
     // ==================== BANNER CAMPO ====================
     const campoBanner = $('campo');
-    const campoImg = campoBanner.querySelector('.campo-media img');
 
     campoBanner.querySelector('[data-campo-product]').addEventListener('click', (e) => {
       const prod = PRODUCTS.find((p) => p.id === e.currentTarget.dataset.campoProduct);
       if (prod) openProductModal(prod);
     });
-
-    // Parallax suave: la foto se desplaza más lento que la página (solo en pantallas grandes)
-    const parallaxMQ = window.matchMedia('(min-width: 861px)');
-    let parallaxTicking = false;
-    function updateParallax() {
-      parallaxTicking = false;
-      if (!parallaxMQ.matches) {
-        campoImg.style.removeProperty('--parallax');
-        return;
-      }
-      const r = campoBanner.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > window.innerHeight) return;
-      const progress = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
-      campoImg.style.setProperty('--parallax', `${(progress * -60).toFixed(1)}px`);
-    }
-    if (!REDUCED_MOTION) {
-      window.addEventListener('scroll', () => {
-        if (!parallaxTicking) {
-          parallaxTicking = true;
-          requestAnimationFrame(updateParallax);
-        }
-      }, { passive: true });
-      updateParallax();
-    }
 
     // ==================== FORMS ====================
     document.getElementById('conciergeForm').addEventListener('submit', (e) => {
@@ -4973,18 +4653,30 @@
     if ('IntersectionObserver' in window && !REDUCED_MOTION) {
       revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          el.classList.add('is-visible');
-          revealObserver.unobserve(el);
-          const delay = parseInt(getComputedStyle(el).getPropertyValue('--d'), 10) || 0;
-          setTimeout(() => {
-            el.removeAttribute('data-reveal');
-            el.classList.remove('is-visible');
-            el.style.removeProperty('--d');
-          }, 1200 + delay);
+          if (entry.isIntersecting) revealNow(entry.target);
         });
       }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+    }
+
+    function revealNow(el) {
+      if (!el.hasAttribute('data-reveal') || el.classList.contains('is-visible')) return;
+      el.classList.add('is-visible');
+      if (revealObserver) revealObserver.unobserve(el);
+      const delay = parseInt(getComputedStyle(el).getPropertyValue('--d'), 10) || 0;
+      setTimeout(() => {
+        el.removeAttribute('data-reveal');
+        el.classList.remove('is-visible');
+        el.style.removeProperty('--d');
+      }, 1200 + delay);
+    }
+
+    // Respaldo del observer: revela todo lo que ya está a la vista o quedó arriba
+    function revealPassed() {
+      if (!revealObserver) return;
+      const limit = window.innerHeight * 0.94;
+      document.querySelectorAll('[data-reveal]:not(.is-visible)').forEach((el) => {
+        if (el.getBoundingClientRect().top < limit) revealNow(el);
+      });
     }
 
     function markReveal(selector, { stagger = 0, mode = '' } = {}) {
@@ -5003,7 +4695,6 @@
     markReveal('.collage-seal-badge', { mode: 'scale' });
     markReveal('.atelier-copy > *', { stagger: 80 });
     markReveal('.campo-banner');
-    markReveal('.lookbook-item', { stagger: 140 });
     markReveal('.care-feature-box');
     markReveal('.accordion-item', { stagger: 90 });
     markReveal('.testimonial-card', { stagger: 120 });
@@ -5047,6 +4738,7 @@
     let navTicking = false;
     function onScroll() {
       navTicking = false;
+      revealPassed();
       const condensed = window.scrollY > heroViewport.offsetHeight * 0.55;
       if (condensed !== navbar.classList.contains('is-condensed')) {
         if (condensed) {
