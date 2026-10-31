@@ -6,12 +6,13 @@
   <title>LEGADO DE SALTA — Marroquinería de Autor en Cuero | De Salta, Argentina, para el mundo</title>
   <meta name="description" content="Carteras de cuero vacuno legítimo hechas a mano en Salta, Argentina. Diseños únicos de autor, ediciones numeradas y envíos a todo el mundo." />
   <meta name="theme-color" content="#1e1612" />
-  <link rel="icon" type="image/png" href="assets/logo-transparent.png" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preload" as="image" href="assets/cartera-1.webp" type="image/webp" fetchpriority="high" />
   <meta property="og:title" content="Legado de Salta — Marroquinería de Autor en Cuero" />
   <meta property="og:description" content="Carteras de cuero hechas a mano en Salta, Argentina, para el mundo. Diseños únicos de autor." />
   <meta property="og:locale" content="es_AR" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/editorial-1.jpg" />
+  <meta property="og:image" content="https://legadosalta.com.ar/assets/editorial-1.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -441,6 +442,11 @@
       flex-direction: column;
       align-items: flex-end;
       text-align: right;
+    }
+
+    /* Nombre y precio: en pantallas grandes siguen la columna; en celular van al lado de la cartera */
+    .hero-buyline {
+      display: contents;
     }
 
     .bag-model-name {
@@ -2766,6 +2772,75 @@
       }
     }
 
+    /* Celular: nombre y precio a la izquierda, la cartera a la derecha */
+    @media (max-width: 560px) {
+      .atelier-viewport {
+        display: grid;
+        grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+        grid-auto-flow: row dense;
+        align-content: start;
+      }
+      .atelier-viewport > *,
+      .hero-left,
+      .hero-right > * {
+        grid-column: 1 / -1;
+      }
+      .hero-right {
+        display: contents;
+      }
+      .stage-layer {
+        grid-column: 2;
+        --bag-w: min(250px, 58vw);
+        height: calc(var(--bag-w) * 1.2);
+        margin: 14px calc(-1 * clamp(28px, 5.5vw, 84px)) 0 -10px;
+      }
+      .hero-right > .hero-buyline {
+        grid-column: 1;
+        order: 1;
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        z-index: 25;
+        padding-top: 14px;
+      }
+      .hero-buyline .bag-model-name {
+        font-size: 21px;
+        line-height: 1.15;
+        margin-bottom: 6px;
+      }
+      .hero-buyline .bag-material-tag {
+        font-size: 12px;
+        line-height: 1.35;
+        margin-bottom: 14px;
+      }
+      .hero-buyline .price-group {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+      .hero-buyline .price-current {
+        font-size: 30px;
+      }
+      .hero-buyline .price-old {
+        font-size: 18px;
+      }
+      .hero-buyline .installments-note {
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      .hero-right > .selector-group {
+        order: 3;
+      }
+      .hero-right > .selector-group:first-of-type {
+        margin-top: 4px;
+      }
+      .hero-right > .selector-group:last-child {
+        padding-bottom: 24px;
+      }
+    }
+
     @media (max-width: 860px) {
       .hero-footer {
         grid-template-columns: auto 1fr;
@@ -2843,7 +2918,7 @@
     <div class="navbar-spacer" id="navbarSpacer" aria-hidden="true"></div>
     <header class="navbar hero-intro" id="navbar" style="--d: 0ms">
       <a href="#top" class="brand" aria-label="Legado de Salta — Inicio">
-        <img src="assets/logo-transparent.png" alt="Logo Legado de Salta" class="brand-seal" />
+        <img src="assets/logo-seal.webp" alt="Logo Legado de Salta" class="brand-seal" width="56" height="56" fetchpriority="high" />
         <div class="brand-text-group">
           <span class="brand-title">Legado de Salta</span>
           <span class="brand-subtitle">Marroquinería de Autor en Cuero</span>
@@ -2929,13 +3004,15 @@
       <div aria-hidden="true"></div>
 
       <div class="hero-right hero-intro" style="--d: 260ms">
-        <h2 class="bag-model-name" id="bagModelName">Marinera Suela Patinada</h2>
-        <span class="bag-material-tag" id="bagMaterialTag">Cuero Vacuno Texturado &amp; Habano</span>
+        <div class="hero-buyline">
+          <h2 class="bag-model-name" id="bagModelName">Marinera Suela Patinada</h2>
+          <span class="bag-material-tag" id="bagMaterialTag">Cuero Vacuno Texturado &amp; Habano</span>
 
-        <div class="price-group" aria-label="Precio de la pieza">
-          <span class="price-current" id="priceCurrent">$185.000</span>
-          <span class="price-old" id="priceOld">$230.000</span>
-          <span class="installments-note" id="installmentsNote">6 cuotas sin interés de $30.833</span>
+          <div class="price-group" aria-label="Precio de la pieza">
+            <span class="price-current" id="priceCurrent">$185.000</span>
+            <span class="price-old" id="priceOld">$230.000</span>
+            <span class="installments-note" id="installmentsNote">6 cuotas sin interés de $30.833</span>
+          </div>
         </div>
 
         <div class="selector-group">
@@ -2977,7 +3054,7 @@
       </div>
 
       <div class="center-tagline">
-        <img src="assets/logo-flower.png" alt="" class="tagline-flower" aria-hidden="true" />
+        <img src="assets/logo-flower.webp" alt="" class="tagline-flower" aria-hidden="true" width="28" height="24" />
         <p class="tagline-text">Distinción artesanal, envuelta en cuero noble</p>
       </div>
 
@@ -3072,13 +3149,13 @@
       <div class="atelier-story-grid">
         <div class="atelier-collage">
           <div class="collage-card">
-            <img src="assets/editorial-2.jpg" alt="Detalle de Tote Trenzada Chocolate y Oro en el Atelier de Salta" />
+            <img src="assets/editorial-2.webp" loading="lazy" decoding="async" alt="Detalle de Tote Trenzada Chocolate y Oro en el Atelier de Salta" />
           </div>
           <div class="collage-card">
-            <img src="assets/editorial-5.jpg" alt="Detalle de Bandolera Eslabones y Cadena Oro" />
+            <img src="assets/editorial-5.webp" loading="lazy" decoding="async" alt="Detalle de Bandolera Eslabones y Cadena Oro" />
           </div>
           <div class="collage-seal-badge">
-            <img src="assets/logo-transparent.png" alt="Sello Oficial Legado de Salta" />
+            <img src="assets/logo-seal.webp" alt="Sello Oficial Legado de Salta" loading="lazy" decoding="async" />
           </div>
         </div>
 
@@ -3117,7 +3194,7 @@
        La foto queda fija de fondo; el título y luego la sección de cuidados pasan por encima. -->
   <section class="campo-banner" id="campo" aria-label="La Marinera Suela Patinada y el cuidado del cuero">
     <div class="campo-media">
-      <img src="assets/editorial-campo.jpg" alt="Mujer caminando por un campo con la Marinera Suela Patinada llevada como mochila" loading="lazy" decoding="async" />
+      <img src="assets/editorial-campo.webp" srcset="assets/editorial-campo-900.webp 900w, assets/editorial-campo.webp 1800w" sizes="100vw" alt="Mujer caminando por un campo con la Marinera Suela Patinada llevada como mochila" loading="lazy" decoding="async" />
     </div>
     <div class="campo-copy">
       <h2 class="section-title">Nacida entre cerros,<br /><em>hecha para el mundo</em></h2>
@@ -3130,7 +3207,7 @@
     <div class="campo-care section-container" id="cuidados">
       <div class="care-grid">
         <div class="care-feature-box">
-          <img src="assets/logo-flower.png" alt="" class="flower-accent" />
+          <img src="assets/logo-flower.webp" alt="" class="flower-accent" loading="lazy" decoding="async" />
           <h2 class="section-title care-title">La nobleza de un cuero que <em>mejora con los años</em></h2>
           <p class="section-subtitle" style="margin-bottom: 24px;">
             Todas nuestras piezas se entregan con su bolsa guardapolvo en lienzo de algodón natural, tarjeta de autenticidad firmada por el artesano y bálsamo nutritivo de cera de abejas en compras de colección.
@@ -3417,7 +3494,7 @@
     <div class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar ficha"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></button>
       <div class="modal-gallery">
-        <img src="assets/cartera-1.png" alt="" class="modal-main-img" id="modalMainImg" decoding="async" />
+        <img src="assets/cartera-1.webp" alt="" class="modal-main-img" id="modalMainImg" decoding="async" />
         <div class="modal-view-switch">
           <button class="view-pill active" type="button" id="viewCutoutBtn">Vista Estudio Blanco</button>
           <button class="view-pill" type="button" id="viewEditorialBtn">Luz Cálida de Taller</button>
@@ -3471,8 +3548,8 @@
         priceNum: 185000,
         price: '$185.000',
         oldPrice: '$230.000',
-        image: 'assets/cartera-1.png',
-        editorialImage: 'assets/editorial-1.jpg',
+        image: 'assets/cartera-1.webp',
+        editorialImage: 'assets/editorial-1.webp',
         swatchColor: 'linear-gradient(135deg, #b87b38 0%, #69361c 100%)',
         dimensions: '29 cm (alto) × 26 cm (ancho) × 15 cm (base)',
         hardware: 'Níquel pulido & ojalillos reforzados',
@@ -3491,8 +3568,8 @@
         priceNum: 210000,
         price: '$210.000',
         oldPrice: '$260.000',
-        image: 'assets/cartera-2.png',
-        editorialImage: 'assets/editorial-2.jpg',
+        image: 'assets/cartera-2.webp',
+        editorialImage: 'assets/editorial-2.webp',
         swatchColor: 'linear-gradient(135deg, #543829 0%, #b8964c 100%)',
         dimensions: '32 cm (alto) × 34 cm (ancho) × 13 cm (fuelle)',
         hardware: 'Remaches en bronce viejo & vivo en cuero oro',
@@ -3511,8 +3588,8 @@
         priceNum: 195000,
         price: '$195.000',
         oldPrice: '$245.000',
-        image: 'assets/cartera-3.png',
-        editorialImage: 'assets/editorial-3.jpg',
+        image: 'assets/cartera-3.webp',
+        editorialImage: 'assets/editorial-3.webp',
         swatchColor: 'linear-gradient(135deg, #242426 0%, #0d0d0e 100%)',
         dimensions: '29 cm (alto) × 26 cm (ancho) × 15 cm (base)',
         hardware: 'Tachas piramidales en níquel & dije esférico labrado',
@@ -3531,8 +3608,8 @@
         priceNum: 190000,
         price: '$190.000',
         oldPrice: '$240.000',
-        image: 'assets/cartera-4.png',
-        editorialImage: 'assets/editorial-4.jpg',
+        image: 'assets/cartera-4.webp',
+        editorialImage: 'assets/editorial-4.webp',
         swatchColor: 'linear-gradient(135deg, #2f4742 0%, #17211f 100%)',
         dimensions: '29 cm (alto) × 26 cm (ancho) × 15 cm (base)',
         hardware: 'Bronce viejo cepillado & borla desmontable con cuentas',
@@ -3551,8 +3628,8 @@
         priceNum: 155000,
         price: '$155.000',
         oldPrice: '$192.000',
-        image: 'assets/cartera-5.png',
-        editorialImage: 'assets/editorial-5.jpg',
+        image: 'assets/cartera-5.webp',
+        editorialImage: 'assets/editorial-5.webp',
         swatchColor: 'linear-gradient(135deg, #263832 0%, #d4af37 100%)',
         dimensions: '21 cm (alto) × 15 cm (ancho) × 6 cm (fuelle)',
         hardware: 'Cadena maciza dorada & placa Hand Made en bronce',
@@ -3571,8 +3648,8 @@
         priceNum: 172000,
         price: '$172.000',
         oldPrice: '$215.000',
-        image: 'assets/cartera-6.png',
-        editorialImage: 'assets/editorial-6.jpg',
+        image: 'assets/cartera-6.webp',
+        editorialImage: 'assets/editorial-6.webp',
         swatchColor: 'linear-gradient(135deg, #32423d 0%, #9ca3af 100%)',
         dimensions: '18 cm (alto) × 25 cm (ancho) × 8 cm (fuelle)',
         hardware: 'Cierre broche niquelado & punteras metálicas labradas',
@@ -3591,8 +3668,8 @@
         priceNum: 168000,
         price: '$168.000',
         oldPrice: '$210.000',
-        image: 'assets/cartera-7.png',
-        editorialImage: 'assets/editorial-7.jpg',
+        image: 'assets/cartera-7.webp',
+        editorialImage: 'assets/editorial-7.webp',
         swatchColor: 'linear-gradient(135deg, #1d2230 0%, #633b26 100%)',
         dimensions: '22 cm (alto) × 20 cm (ancho) × 9 cm (fuelle)',
         hardware: 'Broche torniquete dorado & cadena combinada con cuero',
@@ -3611,8 +3688,8 @@
         priceNum: 165000,
         price: '$165.000',
         oldPrice: '$205.000',
-        image: 'assets/cartera-8.png',
-        editorialImage: 'assets/editorial-8.jpg',
+        image: 'assets/cartera-8.webp',
+        editorialImage: 'assets/editorial-8.webp',
         swatchColor: 'linear-gradient(135deg, #151421 0%, #a1a1aa 100%)',
         dimensions: '22 cm (alto) × 19 cm (ancho) × 11 cm (base)',
         hardware: 'Ojalillos y cadena serpiente en baño de níquel brillante',
@@ -3631,8 +3708,8 @@
         priceNum: 175000,
         price: '$175.000',
         oldPrice: '$218.000',
-        image: 'assets/cartera-9.png',
-        editorialImage: 'assets/editorial-9.jpg',
+        image: 'assets/cartera-9.webp',
+        editorialImage: 'assets/editorial-9.webp',
         swatchColor: 'linear-gradient(135deg, #3c4266 0%, #191d30 100%)',
         dimensions: '23 cm (alto) × 20 cm (ancho) × 8 cm (fuelle)',
         hardware: 'Broche de presión cromado & mosquetones giratorios',
@@ -3651,8 +3728,8 @@
         priceNum: 198000,
         price: '$198.000',
         oldPrice: '$248.000',
-        image: 'assets/cartera-10.png',
-        editorialImage: 'assets/editorial-10.jpg',
+        image: 'assets/cartera-10.webp',
+        editorialImage: 'assets/editorial-10.webp',
         swatchColor: 'linear-gradient(135deg, #4b382a 0%, #b59b7d 100%)',
         dimensions: '26 cm (alto) × 24 cm (ancho) × 10 cm (fuelle)',
         hardware: 'Torniquete dorado, remaches en bronce y mosquetón con borla',
@@ -3719,6 +3796,7 @@
       img.className = 'bag-img';
       img.decoding = 'async';
       // Solo las 3 primeras cargan de inmediato; el resto en segundo plano
+      if (idx === 0) img.fetchPriority = 'high';
       if (idx > 2) img.loading = 'lazy';
 
       const hint = document.createElement('span');
